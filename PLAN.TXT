@@ -1,0 +1,30 @@
+Bikeswap Plan:
+
+-Registration Page:
+	-form
+		-username/pass
+			-ensure username is not already in use
+		-email
+			-ensure email is not in use
+		-enter bike(s) information
+		-profile picture
+	-enter user information into user-database
+	-enter bike/parts information into part-database
+	-send confirmation email upon registering
+
+-Login page:
+	-user authentication
+	-forgot password/password reset process
+
+-Search/browse/display page
+	-display all users within x mile radius
+		-other filters
+	-ability to search for parts/brands
+
+-Profile page
+	-profile page customizability
+		-profile picture
+		-bike pictures
+		-social media?
+	-send request to user for swap
+	-if user accepts the swap, give email/social media information to both users
