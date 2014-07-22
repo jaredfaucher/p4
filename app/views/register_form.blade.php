@@ -9,8 +9,7 @@
 
 	{{ Form::open(array('url' => '/register', 'method' => 'POST')) }}
 
-		First Name: {{ Form::text('first_name') }} <br>
-		Last Name: {{ Form::text('last_name') }} <br>
+		Username: {{ Form::text('username') }} <br>
 		Email: {{ Form::text('email') }} <br>
 		Password: {{ Form::text('password') }} <br>
 

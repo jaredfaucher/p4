@@ -12,7 +12,19 @@ Route::get('/register', function()
 
 Route::post('/register', function()
 {
-	# ADD USER TO USERS TABLE AND THEN GENERATE ADD FORM
+	$username = Input::get('username');
+	# CHECK IF USERNAME IS USED ALREADY
+	$email = Input::get('email');
+	# CHECK IF EMAIL IS USED ALREADY
+	$password = Input::get('password');
+	# CHECK IF PASSWORD IS STRONG ENOUGH
+	$password = Hash::make($password);
+
+	DB::table('users')->insert(array('username' => $username, 
+									 'email' => $email, 
+									 'password' => $password));
+
+	# SEND CONFIRMATION EMAIL
 	return View::make('register_confirm');
 });
 
