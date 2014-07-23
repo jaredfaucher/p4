@@ -32,7 +32,7 @@ Route::post('/register', function()
 	
 	$user->password = Input::get('password');
 	# ENSURE PASSWORD IS STRONG (optional)
-	$user->password = Hash::make($user->password);
+	// $user->password = Hash::make($user->password);
 	
 	$user->save();
 
@@ -55,20 +55,30 @@ Route::get('/login', function()
 Route::post('/login', function()
 {
 	# VALIDATE LOGIN INFORMATION AND REDIRECT TO PROFILE
-	/*$username = Input::get('username');
+	$username = Input::get('username');
 	$password = Input::get('password');
-	$password = Hash::make($password);*/
+	//$password = Hash::make($password);
 
-	if (Auth::attempt(array('username' => Input::get('username'), 
-							'password' => Hash::make(Input::get('password')))))
+	//dd($password);
+
+	if (Auth::attempt(array('username' => $username, 'password' => $password)))
 	{
 		echo 'LOGIN WORKED';
+	}
+	else
+	{
+		echo 'error';
 	}
 });
 
 Route::get('/profile/{user}', function()
 {
 	return View::make('profile_template');
+});
+
+Route::get('/add', function()
+{
+	return View::make('add_form');
 });
 
 Route::get('/search', function()
