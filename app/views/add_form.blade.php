@@ -28,7 +28,7 @@
 									  'grip' => 'Grip',
 									  'saddle' => 'Saddle',
 									  'seat_post' => 'Seat Post',
-									  'seat_clamp' => 'Seat Clamp')) }}
+									  'seat_clamp' => 'Seat Clamp')) }}<br>
 		Part Name: {{ Form::text('part_name') }} <br>
 		{{ Form::submit('Add Part') }}
 
