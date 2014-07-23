@@ -2,12 +2,12 @@ Bikeswap Plan:
 
 -Registration Page:
 	-Register form
-		-username/pass
-			-ensure username is not already in use
-		-email
-			-ensure email is not in use
-	-enter user information into user-database
-	-send confirmation email upon registering
+		x-username/pass
+			x-ensure username is not already in use
+		x-email
+			x-ensure email is not in use
+	x-enter user information into user-database
+	x-send confirmation email upon registering
 
 -Login page:
 	-user authentication

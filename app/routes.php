@@ -55,6 +55,15 @@ Route::get('/login', function()
 Route::post('/login', function()
 {
 	# VALIDATE LOGIN INFORMATION AND REDIRECT TO PROFILE
+	/*$username = Input::get('username');
+	$password = Input::get('password');
+	$password = Hash::make($password);*/
+
+	if (Auth::attempt(array('username' => Input::get('username'), 
+							'password' => Hash::make(Input::get('password')))))
+	{
+		echo 'LOGIN WORKED';
+	}
 });
 
 Route::get('/profile/{user}', function()

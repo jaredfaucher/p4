@@ -9,8 +9,8 @@
 
 	{{ Form::open(array('url' => '/login', 'method' => 'POST')) }}
 
-		Email: {{ Form::text('email') }} <br>
-		Password: {{ Form::text('password') }} <br>
+		Username: {{ Form::text('username') }} <br>
+		Password: {{ Form::password('password') }} <br>
 
 		{{ Form::submit('Login') }}
 
