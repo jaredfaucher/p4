@@ -7,11 +7,13 @@
 @section('content')
 	<h1>Bike Swap :: Register</h1>
 
+	{{{ $error or '' }}}
+
 	{{ Form::open(array('url' => '/register', 'method' => 'POST')) }}
 
 		Username: {{ Form::text('username') }} <br>
 		Email: {{ Form::text('email') }} <br>
-		Password: {{ Form::text('password') }} <br>
+		Password: {{ Form::password('password') }} <br>
 
 		{{ Form::submit('Register') }}
 

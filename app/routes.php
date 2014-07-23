@@ -12,19 +12,38 @@ Route::get('/register', function()
 
 Route::post('/register', function()
 {
-	$username = Input::get('username');
-	# CHECK IF USERNAME IS USED ALREADY
-	$email = Input::get('email');
-	# CHECK IF EMAIL IS USED ALREADY
-	$password = Input::get('password');
-	# CHECK IF PASSWORD IS STRONG ENOUGH
-	$password = Hash::make($password);
-
-	DB::table('users')->insert(array('username' => $username, 
-									 'email' => $email, 
-									 'password' => $password));
+	$user = new User();
+	
+	$user->username = Input::get('username');
+	# ENSURE USERNAME IS UNIQUE
+	$query = User::where('username', '=', $user->username)->first();
+	if (is_null($query) == false)
+	{
+		return View::make('register_form')->with('error','Error: Username exists! Try another!');
+	}
+	
+	$user->email = Input::get('email');
+	# ENSURE EMAIL IS UNIQUE
+	$query = User::where('email', '=', $user->email)->first();
+	if (is_null($query) == false)
+	{
+		return View::make('register_form')->with('error','Error: Email in use already! Try another!');
+	}
+	
+	$user->password = Input::get('password');
+	# ENSURE PASSWORD IS STRONG (optional)
+	$user->password = Hash::make($user->password);
+	
+	$user->save();
 
 	# SEND CONFIRMATION EMAIL
+	Mail::send('emails.register', array('username' => $user->username), function($message) use ($user)
+	{
+		$message->to($user->email, $user->username)
+				->subject('Welcome to Bike Swap!');
+	});
+
+
 	return View::make('register_confirm');
 });
 
