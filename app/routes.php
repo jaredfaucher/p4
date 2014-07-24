@@ -17,7 +17,8 @@ Route::post('/register',
 
             $user = new User;
             $user->username = Input::get('username');
-            $user->email    = Input::get('email');
+            $user->email = Input::get('email');
+            $user->zip = Input::get('zip');
             $user->password = Hash::make(Input::get('password'));
             
 

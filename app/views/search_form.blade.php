@@ -13,6 +13,18 @@
 
 		{{ Form::submit('Search') }}
 
+	{{ Form::close() }}<br>
+
+	{{ Form::open(array('url' => '/search', 'method' => 'POST')) }}
+
+		Find users near you: {{ Form::text('zip') }} <br>
+		Distance from you: {{ Form::select('distance', array('5' => '5 miles',
+															 '10' => '10 miles',
+															 '25' => '25 miles',
+															 '50' => '50 miles')) }}<br>
+
+		{{ Form::submit('Search') }}
+
 	{{ Form::close() }}
 
 @stop

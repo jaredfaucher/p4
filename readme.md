@@ -7,3 +7,6 @@
 ## Details:
 
 ## Plugins/Libraries/Etc:
+	-Bootstrap
+	-"barryvdh/laravel-debugbar": "1.*"
+	-"rubberneck/php-postal-code": "2.*"

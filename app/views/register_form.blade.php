@@ -15,6 +15,7 @@
 
 		Username: {{ Form::text('username') }} <br>
 		Email: {{ Form::text('email') }} <br>
+		Zip Code: {{ Form::text('zip') }} <br>
 		Password: {{ Form::password('password') }} <br>
 
 		{{ Form::submit('Register') }}
