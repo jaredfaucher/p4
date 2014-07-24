@@ -140,7 +140,34 @@ Route::get('/search', function()
 	return View::make('search_form');
 });
 
-Route::post('/search/{query}', function()
+Route::post('/search', function()
 {
-	return View::make('search');
+	$query = Input::get('query');
+    if (!empty($query))
+    {
+        $parts = Part::where('name', 'LIKE', $query);
+        return View::make('search_results')->with($parts);
+
+    }
+    else
+    {
+        include('PostalCode.php');
+
+        $myLocation = new PostalCode(Input::get('zip'));
+        $distanceAway = Input::get('distance');
+        $users = User::all();
+        $i = 0;
+        foreach ($users as $user)
+        {
+            $distanceBetween = round($myLocation->getDistanceTo($user->zip), 2);
+            if ($distanceBetween <= $distanceAway)
+            {
+                $closeUsers[$i] = $user;
+                $i++;
+            }
+        }
+
+
+        return View::make('search_results')->with($closeUsers);
+    }
 });
