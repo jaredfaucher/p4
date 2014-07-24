@@ -20,7 +20,7 @@
 		<td>{{ $part->part_name }}</td>
 		{{ Form::open(array('url' => '/delete', 'method' => 'POST')) }}
 		<td>
-			{{ Form::checkbox('$part->id') }}
+			{{ Form::radio('id', $part->id) }}
 		</td>
 	</tr>
 	@endforeach

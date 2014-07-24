@@ -112,13 +112,30 @@ Route::post('/add',
 	    }
 	)
 );
-Route::post('/delete', function()
-{
-	# DELETE THE PART
 
+Route::post('/delete', 
+	array(
+        'before' => 'csrf', 
+        function()
+		{
+			# DELETE THE PART(s)
+			$id = Input::get('id');
+			$part = Part::find($id);
+			try {
+        		$part->delete();
+    		}
+    		# Fail
+    		catch (Exception $e) {
+        		return Redirect::to('/profile/{user}')->with('error', 'Add failed; please try again.')
+        											  ->with('user', Auth::user()->id)
+        											  ->withInput();
+    		}
 
-	return Redirect::to('/');
-});
+			return Redirect::to('/profile/{user}')->with('user', Auth::user()->id);
+	    }
+	)
+);
+
 Route::get('/search', function()
 {
 	return View::make('search_form');
