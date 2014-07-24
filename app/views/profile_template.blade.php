@@ -30,7 +30,7 @@
 		</td>
 		<td></td>
 		<td>
-			{{ Form::submit('Delete Parts') }}
+			{{ Form::submit('Delete Part') }}
 		</td>
 		{{ Form::close() }}
 	</tr>

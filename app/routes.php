@@ -108,7 +108,7 @@ Route::post('/add',
         		return Redirect::to('/add')->with('error', 'Add failed; please try again.')->withInput();
     		}
 
-			return Redirect::to('/profile/{user}')->with('user', Auth::user()->id);
+			return Redirect::to('/profile/{user}')->with('user', Auth::user()->username);
 	    }
 	)
 );
@@ -118,7 +118,7 @@ Route::post('/delete',
         'before' => 'csrf', 
         function()
 		{
-			# DELETE THE PART(s)
+			# DELETE THE PART
 			$id = Input::get('id');
 			$part = Part::find($id);
 			try {
@@ -127,11 +127,11 @@ Route::post('/delete',
     		# Fail
     		catch (Exception $e) {
         		return Redirect::to('/profile/{user}')->with('error', 'Add failed; please try again.')
-        											  ->with('user', Auth::user()->id)
+        											  ->with('user', Auth::user()->username)
         											  ->withInput();
     		}
 
-			return Redirect::to('/profile/{user}')->with('user', Auth::user()->id);
+			return Redirect::to('/profile/{user}')->with('user', Auth::user()->username);
 	    }
 	)
 );
