@@ -7,7 +7,9 @@
 @section('content')
 	<h1>Bike Swap :: Register</h1>
 
-	{{{ $error or '' }}}
+	@if(Session::get('error'))
+        <div class='error'>{{ Session::get('error') }}</div>
+    @endif
 
 	{{ Form::open(array('url' => '/register', 'method' => 'POST')) }}
 

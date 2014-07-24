@@ -10,7 +10,41 @@ Route::get('/register', function()
 	return View::make('register_form');
 });
 
-Route::post('/register', function()
+Route::post('/register', 
+    array(
+        'before' => 'csrf', 
+        function() {
+
+            $user = new User;
+            $user->username = Input::get('username');
+            $user->email    = Input::get('email');
+            $user->password = Hash::make(Input::get('password'));
+            
+
+            # Try to add the user 
+            try {
+                $user->save();
+            }
+            # Fail
+            catch (Exception $e) {
+                return Redirect::to('/register')->with('error', 'Register failed; please try again.')->withInput();
+            }
+            
+            # SEND CONFIRMATION EMAIL
+            Mail::send('emails.register', array('username' => $user->username), function($message) use ($user)
+            {
+                $message->to($user->email, $user->username)
+                        ->subject('Welcome to Bike Swap!');
+            });
+
+
+            return View::make('register_confirm');
+
+        }
+    )
+);
+
+/*Route::post('/register', function()
 {
 	$user = new User();
 	
@@ -45,7 +79,7 @@ Route::post('/register', function()
 
 
 	return View::make('register_confirm');
-});
+});*/
 
 Route::get('/login', function()
 {
