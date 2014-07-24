@@ -14,7 +14,6 @@
 		@if(Auth::check())
     	<div class="col-md-3"><a href="{{ URL::to('profile/' . Auth::user()->username) }}" >My Profile</a></div>
 		<div class="col-md-3"><a href='/search'>Search Users or Parts</a></div>
-		<div class="col-md-3"><a href='/manage'>Add/Remove Parts</a></div>
     	<div class="col-md-3"><a href='/logout'>Log out</a></div>
 		@else 
 		<div class="col-md-4"><a href="/login">Login</a></div>

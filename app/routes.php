@@ -83,11 +83,42 @@ Route::get('/profile/{user}', function()
 	return View::make('profile_template')->with('parts', $parts);
 });
 
-Route::get('/manage', function()
+Route::get('/add', function()
 {
-	return View::make('manage_form');
+	return View::make('add_form');
 });
 
+Route::post('/add', 
+	array(
+        'before' => 'csrf', 
+        function()
+		{
+			$part = new Part;
+			$part->type = Input::get('type');
+			$part->part_name = Input::get('part_name');
+			$part->user_id = Auth::user()->id;
+
+			#dd($part);
+   			# Try to add the part 
+    		try {
+        		$part->save();
+    		}
+    		# Fail
+    		catch (Exception $e) {
+        		return Redirect::to('/add')->with('error', 'Add failed; please try again.')->withInput();
+    		}
+
+			return Redirect::to('/profile/{user}')->with('user', Auth::user()->id);
+	    }
+	)
+);
+Route::post('/delete', function()
+{
+	# DELETE THE PART
+
+
+	return Redirect::to('/');
+});
 Route::get('/search', function()
 {
 	return View::make('search_form');

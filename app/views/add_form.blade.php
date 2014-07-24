@@ -7,7 +7,11 @@
 @section('content')
 	<h1>Bike Swap :: Add/Remove Parts</h1>
 
-	{{ Form::open(array('url' => '/register', 'method' => 'POST')) }}
+	@if(Session::get('error'))
+        <div class='error'>{{ Session::get('error') }}</div>
+    @endif
+
+	{{ Form::open(array('url' => '/add', 'method' => 'POST')) }}
 
 		Part Type: {{ Form::select('type', array('frame' => 'Frame', 
 									  'fork' => 'Fork',

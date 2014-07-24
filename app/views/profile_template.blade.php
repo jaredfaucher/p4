@@ -12,13 +12,28 @@
 	<tr>
 		<th>Type</th>
 		<th>Name</th>
+		<th>Remove?</th>
 	</tr>
 	@foreach ($parts as $part)
 	<tr>
 		<td>{{ $part->type }}</td>
-		<td>{{ $part->name }}</td>
+		<td>{{ $part->part_name }}</td>
+		{{ Form::open(array('url' => '/delete', 'method' => 'POST')) }}
+		<td>
+			{{ Form::checkbox('$part->id') }}
+		</td>
 	</tr>
 	@endforeach
+	<tr>
+		<td>
+			<a href='/add'>Add Part</a>
+		</td>
+		<td></td>
+		<td>
+			{{ Form::submit('Delete Parts') }}
+		</td>
+		{{ Form::close() }}
+	</tr>
 	</table>
 
 @stop
