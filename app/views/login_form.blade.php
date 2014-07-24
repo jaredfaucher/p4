@@ -6,7 +6,11 @@
 
 @section('content')
 	<h1>Bike Swap :: Login</h1>
-
+    
+    @if(Session::get('error'))
+        <div class='error'>{{ Session::get('error') }}</div>
+    @endif
+	
 	{{ Form::open(array('url' => '/login', 'method' => 'POST')) }}
 
 		Username: {{ Form::text('username') }} <br>

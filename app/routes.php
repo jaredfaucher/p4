@@ -44,75 +44,48 @@ Route::post('/register',
     )
 );
 
-/*Route::post('/register', function()
-{
-	$user = new User();
-	
-	$user->username = Input::get('username');
-	# ENSURE USERNAME IS UNIQUE
-	$query = User::where('username', '=', $user->username)->first();
-	if (is_null($query) == false)
-	{
-		return View::make('register_form')->with('error','Error: Username exists! Try another!');
-	}
-	
-	$user->email = Input::get('email');
-	# ENSURE EMAIL IS UNIQUE
-	$query = User::where('email', '=', $user->email)->first();
-	if (is_null($query) == false)
-	{
-		return View::make('register_form')->with('error','Error: Email in use already! Try another!');
-	}
-	
-	$user->password = Input::get('password');
-	# ENSURE PASSWORD IS STRONG (optional)
-	// $user->password = Hash::make($user->password);
-	
-	$user->save();
-
-	# SEND CONFIRMATION EMAIL
-	Mail::send('emails.register', array('username' => $user->username), function($message) use ($user)
-	{
-		$message->to($user->email, $user->username)
-				->subject('Welcome to Bike Swap!');
-	});
-
-
-	return View::make('register_confirm');
-});*/
-
 Route::get('/login', function()
 {
 	return View::make('login_form');
 });
 
-Route::post('/login', function()
-{
-	# VALIDATE LOGIN INFORMATION AND REDIRECT TO PROFILE
-	$username = Input::get('username');
-	$password = Input::get('password');
-	//$password = Hash::make($password);
+Route::post('/login', 
+    array(
+        'before' => 'csrf', 
+        function() {
 
-	//dd($password);
+            $credentials = Input::only('username', 'password');
 
-	if (Auth::attempt(array('username' => $username, 'password' => $password)))
-	{
-		echo 'LOGIN WORKED';
-	}
-	else
-	{
-		echo 'error';
-	}
+            if (Auth::attempt($credentials, $remember = true)) {
+                
+                return Redirect::intended('/');
+            }
+            else {
+                return Redirect::to('/login')->with('error', 'Log in failed; please try again.');
+            }
+        }
+    )
+);
+
+Route::get('/logout', function() {
+
+    # Log out
+    Auth::logout();
+
+    # Send them to the homepage
+    return Redirect::to('/');
+
 });
 
 Route::get('/profile/{user}', function()
 {
-	return View::make('profile_template');
+	$parts = Part::where('user_id', '=', Auth::user()->id)->get();
+	return View::make('profile_template')->with('parts', $parts);
 });
 
-Route::get('/add', function()
+Route::get('/manage', function()
 {
-	return View::make('add_form');
+	return View::make('manage_form');
 });
 
 Route::get('/search', function()
@@ -123,14 +96,4 @@ Route::get('/search', function()
 Route::post('/search/{query}', function()
 {
 	return View::make('search');
-});
-
-Route::get('/mysql-test', function() {
-
-    # Use the DB component to select all the databases
-    $results = DB::select('SHOW DATABASES;');
-
-    # If the "Pre" package is not installed, you should output using print_r instead
-    print_r($results);
-
 });

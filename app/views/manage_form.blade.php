@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<h1>Bike Swap :: Add Parts</h1>
+	<h1>Bike Swap :: Add/Remove Parts</h1>
 
 	{{ Form::open(array('url' => '/register', 'method' => 'POST')) }}
 
