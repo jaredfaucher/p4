@@ -98,7 +98,6 @@ Route::post('/add',
 			$part->part_name = Input::get('part_name');
 			$part->user_id = Auth::user()->id;
 
-			#dd($part);
    			# Try to add the part 
     		try {
         		$part->save();
