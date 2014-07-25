@@ -15,6 +15,7 @@ Bikeswap Plan:
 	-forgot password/password reset process
 
 -Profile page
+	-looking at other user's profiles
 	-profile page customizability
 		-profile picture
 		-bike pictures
