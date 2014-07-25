@@ -5,7 +5,9 @@
 @stop
 
 @section('content')
-	<h1>Bike Swap :: {{ Auth::user()->username }}'s Profile</h1><br>
+	<h1>Bike Swap :: {{ Auth::user()->username }}'s Profile</h1>
+	<br>
+	<a href='/'>Go Home</a><br>
 
 	<h3>{{ Auth::user()->username }}'s Parts</h3><br>
 	<table class="table">

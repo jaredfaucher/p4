@@ -6,6 +6,8 @@
 
 @section('content')
 	<h1>Bike Swap :: Register</h1>
+	<br>
+	<a href='/'>Go Home</a><br>
 
 	@if(Session::get('error'))
         <div class='error'>{{ Session::get('error') }}</div>

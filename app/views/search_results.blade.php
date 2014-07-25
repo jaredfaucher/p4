@@ -5,8 +5,10 @@
 @stop
 
 @section('content')
-	<h1>Bike Swap :: Seach Results</h1><br>
-	@if(Session::get('parts'))
+	<h1>Bike Swap :: Seach Results</h1>
+	<br>
+	<a href='/'>Go Home</a><br>
+	@if(!empty($parts))
 		<table class="table">
 			<tr>
 				<th>Type</th>
@@ -21,7 +23,7 @@
 			</tr>
 			@endforeach
 		</table>	
-	@elseif(Session::get('closeUsers'))
+	@elseif(!empty($closeUsers))
 		<table class="table">
 			<tr>
 				<th>Username</th>

@@ -22,11 +22,10 @@ Bikeswap Plan:
 	x-add bike/parts to profile
 	-send request to user for swap
 	-if user accepts the swap, give email/social media information to both users
-
--Add page
 	x-add bike part to database
+	x-remove from database
 
 -Search/browse/display page
-	-display all users within x mile radius
+	x-display all users within x mile radius
 		-other filters
-	-ability to search for parts/brands
+	x-ability to search for parts/brands

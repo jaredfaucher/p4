@@ -146,13 +146,9 @@ Route::post('/search', function()
 	$query = Input::get('query');
     if (!empty($query))
     {
-        $parts = Part::where('name', 'LIKE', $query);
-        
-        echo "<pre>";
-        dd($parts);
-        echo "</pre>";
+        $parts = Part::where('part_name', 'LIKE', '%'.$query.'%')->get();
 
-        return View::make('search_results')->with($parts);
+        return View::make('search_results')->with('parts', $parts);
 
     }
     else
@@ -168,8 +164,8 @@ Route::post('/search', function()
             return $miles; 
         }
 
-
-        $zip = Auth::user()->zip;
+        $currentUser = Auth::user();
+        $zip = $currentUser->zip;
         $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
         $json = file_get_contents($url);
         $obj = json_decode($json);
@@ -182,23 +178,28 @@ Route::post('/search', function()
         
         foreach ($users as $user)
         {
-            $zip = Auth::user()->zip;
-            $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
-            $json = file_get_contents($url);
-            $obj = json_decode($json);
+            if ($user->id == $currentUser->id)
+            {
+                break;
+            }
+            else
+            {
+                $zip = $user->zip;
+                $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
+                $json = file_get_contents($url);
+                $obj = json_decode($json);
 
-            $lat2 = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
-            $long2 = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+                $lat2 = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+                $long2 = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
             
-            $distanceBetween = calculateDistance($lat1, $long1, $lat2, $long2);
-            
+                $distanceBetween = calculateDistance($lat1, $long1, $lat2, $long2);
+            }
             if ($distanceBetween <= $distanceAway)
             {
                 $closeUsers[$i] = $user;
                 $i++;
             }
         }
-
         return View::make('search_results')->with('closeUsers', $closeUsers);
     }
 });
