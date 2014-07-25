@@ -6,7 +6,7 @@
 
 @section('content')
 	<h1>Bike Swap :: Seach Results</h1><br>
-	@if($parts)
+	@if(Session::get('parts'))
 		<table class="table">
 			<tr>
 				<th>Type</th>
@@ -21,7 +21,7 @@
 			</tr>
 			@endforeach
 		</table>	
-	@elseif($closeUsers)
+	@elseif(Session::get('closeUsers'))
 		<table class="table">
 			<tr>
 				<th>Username</th>

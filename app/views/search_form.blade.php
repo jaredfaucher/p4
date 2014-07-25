@@ -8,8 +8,8 @@
 	<h1>Bike Swap :: Search</h1>
 
 	{{ Form::open(array('url' => '/search', 'method' => 'POST')) }}
-
-		What are you looking for?: {{ Form::text('query') }} <br>
+		<h3>Find Parts near you</h3><br><br>
+		What are you looking for?: {{ Form::text('query') }} <br><br>
 
 		{{ Form::submit('Search') }}
 
@@ -17,11 +17,11 @@
 
 	{{ Form::open(array('url' => '/search', 'method' => 'POST')) }}
 
-		Find users near you: {{ Form::text('zip') }} <br>
-		Distance from you: {{ Form::select('distance', array('5' => '5 miles',
-															 '10' => '10 miles',
-															 '25' => '25 miles',
-															 '50' => '50 miles')) }}<br>
+		<h3>Find users near you</h3><br><br>
+		Distance from you: {{ Form::select('distanceAway', array(5 => '5 miles',
+															 10 => '10 miles',
+															 25 => '25 miles',
+															 50 => '50 miles')) }}<br><br>
 
 		{{ Form::submit('Search') }}
 

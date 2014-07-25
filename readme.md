@@ -9,4 +9,5 @@
 ## Plugins/Libraries/Etc:
 	-Bootstrap
 	-"barryvdh/laravel-debugbar": "1.*"
-	-"rubberneck/php-postal-code": "2.*"
+	-http://www.techrecite.com/distance-formula-in-php-calculate-distance-between-two-points-programmatically/
+	-https://developers.google.com/maps/documentation/geocoding/
