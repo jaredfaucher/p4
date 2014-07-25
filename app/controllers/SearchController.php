@@ -13,8 +13,14 @@ class SearchController extends BaseController {
     	{
         	$query = '%'.$query.'%';
         	$parts = Part::where('part_name', 'LIKE', '%'.$query.'%')->get();
+            foreach ($parts as $part)
+            {
+                $user = User::where('id', '=', $part->user_id)->first();
 
-        	return View::make('search_results')->with('parts', $parts);
+                $usernames[$part->id] = $user->username;
+        	}
+            return View::make('search_results')->with('parts', $parts)
+                                               ->with('usernames', $usernames);
 
     	}
     	else

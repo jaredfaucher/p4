@@ -19,7 +19,11 @@
 			<tr>
 				<td>{{ $part->type }}</td>
 				<td>{{ $part->part_name }}</td>
-				<td>{{ $part->user_id }}</td>
+				<td>
+					<a href={{ '"/profile/'.$usernames[$part->id].'"' }}>
+						{{ $usernames[$part->id] }}
+					</a>
+				</td>
 			</tr>
 			@endforeach
 		</table>	

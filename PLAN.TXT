@@ -15,18 +15,17 @@ Bikeswap Plan:
 	-forgot password/password reset process
 
 -Profile page
-	-looking at other user's profiles
+	x-looking at other user's profiles
+		x-displays email to contact them about their bike parts
+	x-My profile page
+		x-add bike parts to profile & database
+		x-remove bike parts from profile & database
 	-profile page customizability
 		-profile picture
 		-bike pictures
 		-social media?
-	x-add bike/parts to profile
-	-send request to user for swap
-	-if user accepts the swap, give email/social media information to both users
-	x-add bike part to database
-	x-remove from database
 
 -Search/browse/display page
 	x-display all users within x mile radius
 		-other filters
-	x-ability to search for parts/brands
+	x-ability to search for part names

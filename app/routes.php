@@ -14,11 +14,10 @@ Route::post('/login', array('before' => 'csrf',
 
 Route::get('/logout', 'LogoutController@logout');
 
-Route::get('/profile/{user}', function()
-{
-	$parts = Part::where('user_id', '=', Auth::user()->id)->get();
-	return View::make('profile_template')->with('parts', $parts);
-});
+Route::get('/myprofile', 'ProfileController@myProfile');
+
+########### TODO
+Route::get('/profile/{username}', 'ProfileController@userProfile');
 
 Route::get('/add', 'PartsController@addForm');
 
