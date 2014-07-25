@@ -36,11 +36,17 @@
 			</tr>
 			@foreach ($closeUsers as $user)
 			<tr>
-				<td>{{ $user->username }}</td>
+				<td>
+					<a href={{ '"/profile/'.$user->username.'"' }}>
+						{{ $user->username }}
+					</a>
+				</td>
 				<td>{{ $user->email }}</td>
 				<td>{{ $user->zip }}</td>
 			</tr>
 			@endforeach
-		</table>	
+		</table>
+	@else
+		<h3>There are no users within {{ $distanceAway }} miles!  Try a greater radius!</h3>
 	@endif	
 @stop

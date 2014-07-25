@@ -16,7 +16,6 @@ Route::get('/logout', 'LogoutController@logout');
 
 Route::get('/myprofile', 'ProfileController@myProfile');
 
-########### TODO
 Route::get('/profile/{username}', 'ProfileController@userProfile');
 
 Route::get('/add', 'PartsController@addForm');

@@ -25,7 +25,6 @@ class SearchController extends BaseController {
     	}
     	else
     	{
-        	$distanceAway = Input::get('distanceAway');
         	function calculateDistance($latitude1, $longitude1, $latitude2, $longitude2) {
             	$theta = $longitude1 - $longitude2;
             	$miles = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2))) + (cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta)));
@@ -34,36 +33,34 @@ class SearchController extends BaseController {
             	$miles = $miles * 60 * 1.1515;
             	return $miles; 
         	}
+            function getCoordinates($zip)
+            {
+                $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
+                $json = file_get_contents($url);
+                $obj = json_decode($json);
+                $coordinates['lat'] = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
+                $coordinates['long'] = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
+                return $coordinates;
+            }
 
-        	$currentUser = Auth::user();
-        	$zip = $currentUser->zip;
-        	$url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
-        	$json = file_get_contents($url);
-        	$obj = json_decode($json);
-
-        	$lat1 = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
-        	$long1 = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
-
+            $distanceAway = Input::get('distanceAway');
+            $coordinates1 = getCoordinates(Auth::user()->zip);
         	$users = User::all();
         	$i = 0;
         
         	foreach ($users as $user)
         	{
-            	if ($user->id == $currentUser->id)
+            	if ($user->id == Auth::user()->id)
             	{
                 	continue;
             	}
             	else
             	{
-                	$zip = $user->zip;
-                	$url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
-               		$json = file_get_contents($url);
-                	$obj = json_decode($json);
-
-                	$lat2 = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
-                	$long2 = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
-            
-                	$distanceBetween = calculateDistance($lat1, $long1, $lat2, $long2);
+                    $coordinates2 = getCoordinates($user->zip);
+                	$distanceBetween = calculateDistance($coordinates1['lat'], 
+                                                         $coordinates1['long'], 
+                                                         $coordinates2['lat'],
+                                                         $coordinates2['long']);
                 	if ($distanceBetween <= $distanceAway)
                 	{
                     	$closeUsers[$i] = $user;
@@ -77,9 +74,8 @@ class SearchController extends BaseController {
         	}
         	else
         	{
-        		echo "you're alone";
+        		return View::make('search_results')->with('distanceAway', $distanceAway);
         	}
     	}
 	}
-
 }
