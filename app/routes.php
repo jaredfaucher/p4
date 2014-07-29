@@ -29,3 +29,5 @@ Route::post('/delete', array('before' => 'csrf',
 Route::get('/search', 'SearchController@searchForm');
 
 Route::post('/search', 'SearchController@searchResults');
+
+Route::post('/request', 'ProfileController@requestPart');

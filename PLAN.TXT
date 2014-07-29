@@ -24,6 +24,8 @@ Bikeswap Plan:
 		-profile picture
 		-bike pictures
 		-social media?
+	x-part request
+		-sends email to the user stating that someone in interested
 
 -Search/browse/display page
 	x-display all users within x mile radius

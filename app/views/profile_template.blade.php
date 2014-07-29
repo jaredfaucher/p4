@@ -10,15 +10,14 @@
 	<a href='/'>Go Home</a><br>
 
 	<h3>{{ $user->username }}'s Parts</h3><br>
-	@if(Auth::user() != $user)
-	<h5>Email {{ $user->username }} about their parts: {{ $user->email }}</h5><br>
-	@endif
 	<table class="table">
 	<tr>
 		<th>Type</th>
 		<th>Name</th>
 		@if(Auth::user() == $user)
 		<th>Remove?</th>
+		@else
+		<th>Interested?</th>
 		@endif
 	</tr>
 	@foreach ($parts as $part)
@@ -27,6 +26,11 @@
 		<td>{{ $part->part_name }}</td>
 		@if(Auth::user() == $user)
 		{{ Form::open(array('url' => '/delete', 'method' => 'POST')) }}
+		<td>
+			{{ Form::radio('id', $part->id) }}
+		</td>
+		@else
+		{{ Form::open(array('url' => '/request', 'method' => 'POST')) }}
 		<td>
 			{{ Form::radio('id', $part->id) }}
 		</td>
@@ -41,6 +45,15 @@
 		<td></td>
 		<td>
 			{{ Form::submit('Delete Part') }}
+		</td>
+		{{ Form::close() }}
+	</tr>
+	@else
+	<tr>
+		<td></td>
+		<td></td>
+		<td>
+			{{ Form::submit('Request Part') }}
 		</td>
 		{{ Form::close() }}
 	</tr>

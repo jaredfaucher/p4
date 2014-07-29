@@ -16,5 +16,18 @@ class ProfileController extends BaseController {
 		return View::make('profile_template')->with('parts', $parts)
 											 ->with('user', $user);
 	}
+	public function requestPart()
+	{
+        $fromUser = Auth::user();
+        $part = Part::where('id', '=', Input::get('id'))->first();
+        $toUser = User::where('id', '=', $part->user_id)->first();
+        # SEND REQUEST EMAIL
+        Mail::send('emails.request', array('toUser' => $toUser, 'fromUser' => $fromUser, 'part' => $part), function($message) use ($toUser)
+        {
+            $message->to($toUser->email, $toUser->username)
+                    ->subject('Someone is interested in your parts!');
+        });
+        return Redirect::to('/profile/'.$toUser->username);
+	}
 
 }
