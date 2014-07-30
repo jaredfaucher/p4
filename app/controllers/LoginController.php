@@ -2,12 +2,12 @@
 
 class LoginController extends BaseController {
 
-	public function loginForm()
+	public function getLogin()
 	{
 		return View::make('login_form');
 	}
 
-	public function loginAuth()
+	public function postLogin()
 	{
         $credentials = Input::only('username', 'password');
 
@@ -16,7 +16,9 @@ class LoginController extends BaseController {
             return Redirect::intended('/');
         }
         else {
-            return Redirect::to('/login')->with('error', 'Log in failed; please try again.');
+            return Redirect::to('/login')
+                ->with('flash_message', 'Log in failed; please try again.')
+            	->withInput();
         }
 	}
 }

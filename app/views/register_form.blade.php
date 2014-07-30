@@ -9,9 +9,9 @@
 	<br>
 	<a href='/'>Go Home</a><br>
 
-	@if(Session::get('error'))
-        <div class='error'>{{ Session::get('error') }}</div>
-    @endif
+	@foreach($errors->all() as $message)
+        <div class='error'>{{ $message }}</div>
+    @endforeach
 
 	{{ Form::open(array('url' => '/register', 'method' => 'POST')) }}
 
@@ -19,6 +19,7 @@
 		Email: {{ Form::text('email') }} <br>
 		Zip Code: {{ Form::text('zip') }} <br>
 		Password: {{ Form::password('password') }} <br>
+		<small>Min: 6</small><br>
 
 		{{ Form::submit('Register') }}
 

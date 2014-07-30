@@ -2,11 +2,11 @@
 
 class SearchController extends BaseController {
 
-	public function searchForm()
+	public function getSearch()
 	{
 		return View::make('search_form');
 	}
-	public function searchResults()
+	public function postSearch()
 	{
 		$query = Input::get('query');
     	if (!empty($query))
@@ -19,8 +19,9 @@ class SearchController extends BaseController {
 
                 $usernames[$part->id] = $user->username;
         	}
-            return View::make('search_results')->with('parts', $parts)
-                                               ->with('usernames', $usernames);
+            return View::make('search_results')
+                ->with('parts', $parts)
+                ->with('usernames', $usernames);
 
     	}
     	else
@@ -70,11 +71,13 @@ class SearchController extends BaseController {
         	}
         	if (!empty($closeUsers))
         	{
-            	return View::make('search_results')->with('closeUsers', $closeUsers);
+            	return View::make('search_results')
+                    ->with('closeUsers', $closeUsers);
         	}
         	else
         	{
-        		return View::make('search_results')->with('distanceAway', $distanceAway);
+        		return View::make('search_results')
+                    ->with('distanceAway', $distanceAway);
         	}
     	}
 	}

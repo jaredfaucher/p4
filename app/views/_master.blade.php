@@ -9,6 +9,9 @@
 		<link rel="stylesheet" href="css/p4.css">
 	</head>
 	<body>
+		@if(Session::get('flash_message'))
+			<div class='flash-message'>{{ Session::get('flash_message') }}</div>
+		@endif
 		<div class="container">
 			@yield('content')
 		</div>

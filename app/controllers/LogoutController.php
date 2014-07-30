@@ -2,7 +2,7 @@
 
 class LogoutController extends BaseController {
 
-	public function logout()
+	public function getLogout()
 	{
 		# Log out
     	Auth::logout();
