@@ -8,7 +8,9 @@
 	<h1>Bike Swap :: {{ $user->username }}'s Profile</h1>
 	<br>
 	<a href='/'>Go Home</a><br>
-	<a href='/myprofile/edit'>Edit Profile</a><br>
+	@if(Auth::user() == $user)
+		<a href='/myprofile/edit'>Edit Profile</a><br>
+	@endif
 	<h3>{{ $user->username }}'s Parts</h3><br>
 	<table class="table">
 	<tr>

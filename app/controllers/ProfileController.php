@@ -27,7 +27,7 @@ class ProfileController extends BaseController {
             $user = Auth::user();
             if($change == 'password')
             {
-            	$newPassword = Input::get('newPassword');
+                $newPassword = Input::get('newPassword');
             	$confirmNewPassword = Input::get('confirmNewPassword');
             	if ($newPassword == $confirmNewPassword)
             	{
@@ -91,6 +91,16 @@ class ProfileController extends BaseController {
                 		->with('flash_message', 'New Zip and confirmation do not match. Try again!');
             	}
             }
+            
+            # SEND CONFIRMATION EMAIL
+            Mail::send('change.register', array('username' => $user->username, 'change' => $change), function($message) use ($user)
+            {
+                $message->to($user->email, $user->username)
+                    ->subject('Your Account has been changed');
+            });
+
+            return Redirect::to('/myprofile')
+                ->with('flash_message', 'Changes Made!');
         }
         else {
             return Redirect::to('/myprofile/edit')
@@ -102,7 +112,7 @@ class ProfileController extends BaseController {
 	public function userProfile($username)
 	{
 		try {
-			$user = User::findOrFail($username);
+			$user = User::where('username', '=', $username)->firstOrFail();
 		}
 		catch(Exception $e) {
             return Redirect::to('/search')->with('flash_message', 'User not found');
