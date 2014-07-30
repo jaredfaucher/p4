@@ -16,6 +16,10 @@ Route::get('/logout', 'LogoutController@getLogout');
 
 Route::get('/myprofile', 'ProfileController@myProfile');
 
+Route::get('/myprofile/edit', 'ProfileController@getEdit');
+
+Route::post('/myprofile/edit', 'ProfileController@postEdit');
+
 Route::get('/profile/{username}', 'ProfileController@userProfile');
 
 Route::get('/add', 'PartsController@addForm');

@@ -12,7 +12,17 @@ class SearchController extends BaseController {
     	if (!empty($query))
     	{
         	$query = '%'.$query.'%';
-        	$parts = Part::where('part_name', 'LIKE', '%'.$query.'%')->get();
+            $type = Input::get('type');
+        	if ($type == 'any')
+            {
+                $parts = Part::where('part_name', 'LIKE', '%'.$query.'%')->get();
+            }
+            else
+            {
+                $parts = Part::where('part_name', 'LIKE', '%'.$query.'%')
+                    ->where('type', '=', $type)
+                    ->get();
+            }
             foreach ($parts as $part)
             {
                 $user = User::where('id', '=', $part->user_id)->first();
@@ -24,7 +34,7 @@ class SearchController extends BaseController {
                 ->with('usernames', $usernames);
 
     	}
-    	else
+    	elseif (!empty($distanceAway))
     	{
         	function calculateDistance($latitude1, $longitude1, $latitude2, $longitude2) {
             	$theta = $longitude1 - $longitude2;
@@ -80,5 +90,13 @@ class SearchController extends BaseController {
                     ->with('distanceAway', $distanceAway);
         	}
     	}
+        else
+        {
+            $username = Input::get('username');
+            $username = '%'.$username.'%';
+            $users = User::where('username', 'LIKE', '%'.$username.'%')->get();
+            return View::make('search_results')
+                ->with('users', $users);
+        }
 	}
 }

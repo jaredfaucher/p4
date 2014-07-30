@@ -46,7 +46,26 @@
 			</tr>
 			@endforeach
 		</table>
-	@else
-		<h3>There are no users within {{ $distanceAway }} miles!  Try a greater radius!</h3>
-	@endif	
+	@elseif(!empty($users))
+		<table class="table">
+			<tr>
+				<th>Username</th>
+				<th>Email</th>
+				<th>Zip Code</th>
+			</tr>
+			@foreach ($users as $user)
+			<tr>
+				<td>
+					<a href={{ '"/profile/'.$user->username.'"' }}>
+						{{ $user->username }}
+					</a>
+				</td>
+				<td>{{ $user->email }}</td>
+				<td>{{ $user->zip }}</td>
+			</tr>
+			@endforeach
+		</table>	
+	@elseif(empty($users))
+		<h3>There are no users matching that criteria.  Try again!</h3>
+	@endif
 @stop

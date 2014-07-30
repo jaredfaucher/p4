@@ -20,7 +20,9 @@ Bikeswap Plan:
 	x-My profile page
 		x-add bike parts to profile & database
 		x-remove bike parts from profile & database
+
 	-profile page customizability
+		x-change password, email, zipcode
 		-profile picture
 		-bike pictures
 		-social media?
@@ -29,5 +31,5 @@ Bikeswap Plan:
 
 -Search/browse/display page
 	x-display all users within x mile radius
-		-other filters
+		x-other filters
 	x-ability to search for part names
