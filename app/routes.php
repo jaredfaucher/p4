@@ -35,3 +35,11 @@ Route::get('/search', 'SearchController@getSearch');
 Route::post('/search', 'SearchController@postSearch');
 
 Route::post('/request', 'ProfileController@requestPart');
+
+Route::get('/remind', 'RemindersController@getRemind');
+
+Route::post('/remind', 'RemindersController@postRemind');
+
+Route::get('/reset/{token}', 'RemindersController@getReset');
+
+Route::post('/reset', 'RemindersController@postReset');

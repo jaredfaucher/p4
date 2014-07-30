@@ -17,6 +17,7 @@
 
 		Username: {{ Form::text('username') }} <br>
 		Password: {{ Form::password('password') }} <br>
+		<a href='/remind'>Forgot your password?</a><br>
 
 		{{ Form::submit('Login') }}
 
