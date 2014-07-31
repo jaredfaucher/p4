@@ -49,6 +49,23 @@ class RemindersController extends Controller {
 	 */
 	public function postReset()
 	{
+		$rules = array(
+                'email' => 'required|email',
+                'password' => 'required|min:6',
+                'password_confirmation' => 'required|min:6'
+            );
+        
+        $validator = Validator::make(Input::only('email', 'password', 'password_confirmation'), $rules);
+        
+        if ($validator->fails())
+        {
+            return Redirect::back()
+                ->with('flash_message', 'Reset failed, please fix errors and try again')
+                ->withInput()
+                ->withErrors($validator);
+        }
+
+
 		$credentials = Input::only(
 			'email', 'password', 'password_confirmation', 'token'
 		);
