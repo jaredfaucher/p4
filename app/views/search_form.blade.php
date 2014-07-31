@@ -11,8 +11,13 @@
 
 	{{ Form::open(array('url' => '/search', 'method' => 'POST')) }}
 		<h3>Find Parts near you</h3><br>
-		What are you looking for?: {{ Form::text('query') }} <br>
-		Type (optional): {{ Form::select('type', array('any' => 'Any',
+		<div class="row">
+			<div class="col-md-2">What are you looking for?: </div>
+			<div class="col-md-2">{{ Form::text('query') }}</div>
+		</div>
+		<div class="row">	
+			<div class="col-md-2">Type (optional): </div>
+			<div class="col-md-2">{{ Form::select('type', array('any' => 'Any',
 									  'frame' => 'Frame', 
 									  'fork' => 'Fork',
 									  'headset' => 'Headset',
@@ -32,9 +37,12 @@
 									  'grip' => 'Grip',
 									  'saddle' => 'Saddle',
 									  'seat_post' => 'Seat Post',
-									  'seat_clamp' => 'Seat Clamp'), 'all') }}<br><br>
-
-		{{ Form::submit('Search') }}
+									  'seat_clamp' => 'Seat Clamp'), 'all') }}</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-2">{{ Form::submit('Search') }}</div>
+		</div>
 
 	{{ Form::close() }}<br>
 

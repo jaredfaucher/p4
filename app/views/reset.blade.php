@@ -14,14 +14,23 @@
     @endforeach
 
 	{{ Form::open(array('route' => array('password.update', $token))) }}
-
-		Email: {{ Form::text('email') }} <br>
-		New Password: {{ Form::password('password') }} <br>
-		Confirm Password: {{ Form::password('password_confirmation') }} <br>
-		{{ Form::hidden('token', $token) }}
-
-		{{ Form::submit('Reset Password') }}
-
+		<div class="row">
+			<div class="col-md-2">Email: </div>
+			<div class="col-md-2">{{ Form::text('email') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">New Password: </div>
+			<div class="col-md-2">{{ Form::password('password') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">Confirm Password: </div>
+			<div class="col-md-2">{{ Form::password('password_confirmation') }}</div> 
+			{{ Form::hidden('token', $token) }}
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-2">{{ Form::submit('Reset Password') }}</div>
+		</div>
 	{{ Form::close() }}
 
 @stop

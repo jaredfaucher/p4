@@ -14,14 +14,27 @@
     @endforeach
 
 	{{ Form::open(array('url' => '/register', 'method' => 'POST')) }}
-
-		Username: {{ Form::text('username') }} <br>
-		Email: {{ Form::text('email') }} <br>
-		Zip Code: {{ Form::text('zip') }} <br>
-		Password: {{ Form::password('password') }} <br>
-		<small>Min: 6</small><br>
-
-		{{ Form::submit('Register') }}
+		<div class="row">
+			<div class="col-md-2">Username: </div>
+			<div class="col-md-2">{{ Form::text('username') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">Email: </div>
+			<div class="col-md-2">{{ Form::text('email') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">Zip Code: </div>
+			<div class="col-md-2">{{ Form::text('zip') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">Password: </div>
+			<div class="col-md-2">{{ Form::password('password') }}<br>
+				<small>Min: 6</small>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">{{ Form::submit('Register') }}</div>
+		</div>
 
 	{{ Form::close() }}
 

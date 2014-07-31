@@ -14,10 +14,14 @@
     @endforeach
 
 	{{ Form::open(array('url' => '/password/reset', 'method' => 'POST')) }}
-
-		Email: {{ Form::text('email') }} <br>
-
-		{{ Form::submit('Send Reminder') }}
+		<div class="row">
+			<div class="col-md-2">Email: </div>
+			<div class="col-md-2">{{ Form::text('email') }}</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-2">{{ Form::submit('Send Reminder') }}</div>
+		</div>
 
 	{{ Form::close() }}
 

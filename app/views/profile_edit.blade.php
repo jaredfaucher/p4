@@ -9,29 +9,65 @@
 	<br>
 	<a href='/'>Go Home</a><br>
 	{{ Form::open(array('url' => '/myprofile/edit', 'method' => 'POST')) }}
-		<h3>Change Password</h3><br>
+		<div class="row"><h3>Change Password</h3></div>
 		{{ Form::hidden('change', 'password') }}
-		Current Password: {{ Form::password('password') }}<br>
-		New Password: {{ Form::password('newPassword') }}<br>
-		Confirm New Password: {{ Form::password('confirmNewPassword') }}<br>
-		{{ Form::submit('Change Password') }}
+		<div class="row">
+			<div class="col-md-2">Current Password: </div>
+			<div class="col-md-2">{{ Form::password('password') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">New Password: </div>
+			<div class="col-md-2">{{ Form::password('newPassword') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">Confirm New Password: </div>
+			<div class="col-md-2">{{ Form::password('confirmNewPassword') }}</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-2">{{ Form::submit('Change Password') }}</div>
+		</div>
 	{{ Form::close() }}<br><br>
 	
 	{{ Form::open(array('url' => '/myprofile/edit', 'method' => 'POST')) }}
-		<h3>Change Email</h3><br>
+		<div class="row"><h3>Change Email</h3></div>
 		{{ Form::hidden('change', 'email') }}
-		Enter Password: {{ Form::password('password') }}<br>
-		New Email: {{ Form::text('newEmail') }}<br>
-		Confirm New Email: {{ Form::text('confirmNewEmail') }}<br>
-		{{ Form::submit('Change Email') }}
+		<div class="row">
+			<div class="col-md-2">Enter Password: </div>
+			<div class="col-md-2">{{ Form::password('password') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">New Email: </div>
+			<div class="col-md-2">{{ Form::text('newEmail') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">Confirm New Email: </div>
+			<div class="col-md-2">{{ Form::text('confirmNewEmail') }}</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-2">{{ Form::submit('Change Email') }}</div>
+		</div>
 	{{ Form::close() }}<br><br>
 	
 	{{ Form::open(array('url' => '/myprofile/edit', 'method' => 'POST')) }}
-		<h3>Change Zip Code</h3><br>
+		<div class="row"><h3>Change Zip Code</h3></div>
 		{{ Form::hidden('change', 'zip') }}
-		Enter Password: {{ Form::password('password') }}<br>
-		New Zip Code: {{ Form::text('newZip') }}<br>
-		Confirm Zip Code: {{ Form::text('confirmNewZip') }}<br>
-		{{ Form::submit('Change Zip Code') }}
+		<div class="row">
+			<div class="col-md-2">Enter Password: </div>
+			<div class="col-md-2">{{ Form::password('password') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">New Zip Code: </div>
+			<div class="col-md-2">{{ Form::text('newZip') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">Confirm Zip Code: </div>
+			<div class="col-md-2">{{ Form::text('confirmNewZip') }}</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-2">{{ Form::submit('Change Zip Code') }}</div>
+		</div>
 	{{ Form::close() }}<br><br>
 @stop
