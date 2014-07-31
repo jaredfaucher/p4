@@ -1,1 +1,5 @@
-.container {}
+.flash-message{
+	text-align: center;
+	background-color: yellow;
+	text-decoration: bold;
+}

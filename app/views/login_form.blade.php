@@ -7,19 +7,30 @@
 @section('content')
 	<h1>Bike Swap :: Login</h1>
 	<br>
-	<a href='/'>Go Home</a><br>
+	<a href='/'>Go Home</a><br><br>
     
     @if(Session::get('error'))
         <div class='error'>{{ Session::get('error') }}</div>
     @endif
 	
 	{{ Form::open(array('url' => '/login', 'method' => 'POST')) }}
-
-		Username: {{ Form::text('username') }} <br>
-		Password: {{ Form::password('password') }} <br>
-		<a href='/password/reset'>Forgot your password?</a><br>
-
-		{{ Form::submit('Login') }}
+		<div class="row">
+			<div class="col-md-2">Username: </div>
+			<div class="col-md-2">{{ Form::text('username') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">Password: </div>
+			<div class="col-md-2">{{ Form::password('password') }}</div>
+		</div>
+		<div class="row">
+			<div class="col-md-2">
+				<a href='/password/reset'>Forgot your password?</a>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-md-2">{{ Form::submit('Login') }}</div>
+		</div>
 
 	{{ Form::close() }}
 

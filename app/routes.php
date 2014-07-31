@@ -14,27 +14,27 @@ Route::post('/login', array('before' => 'csrf',
 
 Route::get('/logout', 'LogoutController@getLogout');
 
-Route::get('/myprofile', 'ProfileController@myProfile');
+Route::get('/myprofile', 'ProfileController@getMyProfile');
 
 Route::get('/myprofile/edit', 'ProfileController@getEdit');
 
 Route::post('/myprofile/edit', 'ProfileController@postEdit');
 
-Route::get('/profile/{username}', 'ProfileController@userProfile');
+Route::get('/profile/{username}', 'ProfileController@getProfile');
 
-Route::get('/add', 'PartsController@addForm');
+Route::get('/add', 'PartsController@getAdd');
 
 Route::post('/add', array('before' => 'csrf', 
-                          'uses' => 'PartsController@addPart'));
+                          'uses' => 'PartsController@postAdd'));
 
 Route::post('/delete', array('before' => 'csrf', 
-                             'uses' => 'PartsController@deletePart'));
+                             'uses' => 'PartsController@postDelete'));
 
 Route::get('/search', 'SearchController@getSearch');
 
 Route::post('/search', 'SearchController@postSearch');
 
-Route::post('/request', 'ProfileController@requestPart');
+Route::post('/request', 'ProfileController@postRequest');
 
 Route::get('/password/reset', 'RemindersController@getRemind');
 

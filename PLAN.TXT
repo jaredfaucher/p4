@@ -4,7 +4,7 @@ Bikeswap Plan:
 	x-Register form
 		x-username/pass
 			x-ensure username/email is not already in use
-			-password strength
+			x-password strength(min 6 characters)
 		x-email
 			x-ensure email is not in use
 	x-enter user information into user-database
@@ -13,7 +13,7 @@ Bikeswap Plan:
 -Login page:
 	x-user authentication
 	x-forgot password/password reset process
-		-auth password
+		x-auth password
 
 -Profile page
 	x-looking at other user's profiles
@@ -32,5 +32,5 @@ Bikeswap Plan:
 
 -Search/browse/display page
 	x-display all users within x mile radius
-		x-other filters
 	x-ability to search for part names
+		x-other filters

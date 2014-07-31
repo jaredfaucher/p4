@@ -2,12 +2,20 @@
 
 class PartsController extends BaseController {
 
-	public function addForm()
+	public function getAdd()
 	{
-		return View::make('add_form');
+		if (Auth::user())
+        {
+            return View::make('add_form');
+        }
+        else
+        {
+            return Redirect::to('/login')
+                ->with('flash_message', 'Please log in');
+        }
 	}
 
-	public function addPart()
+	public function postAdd()
 	{
 		$rules = array(
                 'type' => 'required',
@@ -44,7 +52,7 @@ class PartsController extends BaseController {
 			->with('user', Auth::user()->username);
 	}
 
-	public function deletePart()
+	public function postDelete()
 	{
 		# DELETE THE PART
 		$id = Input::get('id');

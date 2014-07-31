@@ -2,18 +2,34 @@
 
 class ProfileController extends BaseController {
 
-	public function myProfile()
+	public function getMyProfile()
 	{
-		$parts = Part::where('user_id', '=', Auth::user()->id)->get();
-		return View::make('profile_template')
-			->with('parts', $parts)
-			->with('user', Auth::user());
+		if (Auth::user())
+        {
+            $parts = Part::where('user_id', '=', Auth::user()->id)->get();
+            return View::make('profile_template')
+                ->with('parts', $parts)
+                ->with('user', Auth::user());
+        }
+        else
+        {
+            return Redirect::to('/login')
+                ->with('flash_message', 'Please log in');
+        }
 	}
 
 	public function getEdit()
 	{
-		return View::make('profile_edit')
-			->with('user', Auth::user());
+        if (Auth::user())
+        {
+            return View::make('profile_edit')
+                ->with('user', Auth::user());
+        }
+        else
+        {
+            return Redirect::to('/login')
+                ->with('flash_message', 'Please log in');
+        }		
 	}
 
 	public function postEdit()
@@ -109,20 +125,28 @@ class ProfileController extends BaseController {
         }
 	}
 
-	public function userProfile($username)
+	public function getProfile($username)
 	{
-		try {
-			$user = User::where('username', '=', $username)->firstOrFail();
-		}
-		catch(Exception $e) {
-            return Redirect::to('/search')->with('flash_message', 'User not found');
+        if (Auth::user())
+        {
+            try {
+                $user = User::where('username', '=', $username)->firstOrFail();
+            }
+            catch(Exception $e) {
+                return Redirect::to('/search')->with('flash_message', 'User not found');
+            }
+            $parts = Part::where('user_id', '=', $user->id)->get();
+            return View::make('profile_template')
+                ->with('parts', $parts)
+                ->with('user', $user);
         }
-		$parts = Part::where('user_id', '=', $user->id)->get();
-		return View::make('profile_template')
-			->with('parts', $parts)
-			->with('user', $user);
+        else
+        {
+            return Redirect::to('/login')
+                ->with('flash_message', 'Please log in');
+        }		
 	}
-	public function requestPart()
+	public function postRequest()
 	{
         $fromUser = Auth::user();
         $part = Part::where('id', '=', Input::get('id'))->first();
@@ -135,5 +159,4 @@ class ProfileController extends BaseController {
         });
         return Redirect::to('/profile/'.$toUser->username);
 	}
-
 }

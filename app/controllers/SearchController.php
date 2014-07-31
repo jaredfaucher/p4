@@ -4,7 +4,15 @@ class SearchController extends BaseController {
 
 	public function getSearch()
 	{
-		return View::make('search_form');
+		if (Auth::user())
+        {
+            return View::make('search_form');
+        }
+        else
+        {
+            return Redirect::to('/login')
+                ->with('flash_message', 'Please log in');
+        }
 	}
 	public function postSearch()
 	{
