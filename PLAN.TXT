@@ -12,7 +12,8 @@ Bikeswap Plan:
 
 -Login page:
 	x-user authentication
-	-forgot password/password reset process
+	x-forgot password/password reset process
+		-auth password
 
 -Profile page
 	x-looking at other user's profiles

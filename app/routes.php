@@ -36,10 +36,12 @@ Route::post('/search', 'SearchController@postSearch');
 
 Route::post('/request', 'ProfileController@requestPart');
 
-Route::get('/remind', 'RemindersController@getRemind');
+Route::get('/password/reset', 'RemindersController@getRemind');
 
-Route::post('/remind', 'RemindersController@postRemind');
+Route::post('/password/reset', 'RemindersController@postRemind');
 
-Route::get('/reset/{token}', 'RemindersController@getReset');
+Route::get('/password/reset/{token}', 'RemindersController@getReset');
 
-Route::post('/reset', 'RemindersController@postReset');
+Route::post('/password/reset/{token}', array(
+										'uses' => 'RemindersController@postReset',
+										'as' => 'password.update'));

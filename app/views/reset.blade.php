@@ -13,12 +13,12 @@
         <div class='error'>{{ $message }}</div>
     @endforeach
 
-	{{ Form::open(array('url' => '/reset', 'method' => 'POST')) }}
+	{{ Form::open(array('route' => array('password.update', $token))) }}
 
 		Email: {{ Form::text('email') }} <br>
-		New Password: {{ Form::text('password') }} <br>
-		Confirm Password: {{ Form::text('password_confirmation') }} <br>
-		{{ Form::hidden('token', '{{ $token}}') }}
+		New Password: {{ Form::password('password') }} <br>
+		Confirm Password: {{ Form::password('password_confirmation') }} <br>
+		{{ Form::hidden('token', $token) }}
 
 		{{ Form::submit('Reset Password') }}
 

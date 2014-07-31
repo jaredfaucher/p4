@@ -13,7 +13,7 @@
         <div class='error'>{{ $message }}</div>
     @endforeach
 
-	{{ Form::open(array('url' => '/remind', 'method' => 'POST')) }}
+	{{ Form::open(array('url' => '/password/reset', 'method' => 'POST')) }}
 
 		Email: {{ Form::text('email') }} <br>
 
