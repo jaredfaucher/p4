@@ -30,6 +30,10 @@ class CreatePartsTable extends Migration {
 	 */
 	public function down()
 	{
+		Schema::table('parts', function($table) {
+			$table->dropForeign('parts_user_id_foreign');
+		});
+
 		Schema::drop('parts');
 	}
 

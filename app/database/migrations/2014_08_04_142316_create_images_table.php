@@ -18,7 +18,7 @@ class CreateImagesTable extends Migration {
 			$table->integer('user_id')->unsigned();
 			$table->string('filename');
 			$table->string('size');
-			$table->string('url');
+			$table->string('path');
 
 			$table->foreign('user_id')->references('id')->on('users');
 		});
@@ -31,7 +31,11 @@ class CreateImagesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('parts');
+		Schema::table('images', function($table) {
+			$table->dropForeign('images_user_id_foreign');
+		});
+
+		Schema::drop('images');
 	}
 
 }

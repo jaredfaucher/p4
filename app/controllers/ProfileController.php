@@ -7,8 +7,10 @@ class ProfileController extends BaseController {
 		if (Auth::user())
         {
             $parts = Part::where('user_id', '=', Auth::user()->id)->get();
+            $img = Image::where('user_id', '=', Auth::user()->id)->get();
             return View::make('profile_template')
                 ->with('parts', $parts)
+                ->with('img', $img)
                 ->with('user', Auth::user());
         }
         else
@@ -141,7 +143,7 @@ class ProfileController extends BaseController {
     public function postAddImage()
     {
         $file = Input::file('file');
-        $destinationPath = public_path().'tmp';
+        $destinationPath = public_path().'\storage\profile';
         $filename = $file->getClientOriginalName();
         
         if (Input::file('file')->move($destinationPath, $filename))
@@ -149,7 +151,8 @@ class ProfileController extends BaseController {
             $image = new Image;
             $image->user_id = Auth::user()->id;       
             $image->filename = $filename;
-            $image->size = $file->getMaxFilesize();
+            $image->size = $file->getSize();
+            $image->path = $destinationPath;
 
         }
         else
@@ -169,8 +172,10 @@ class ProfileController extends BaseController {
                 return Redirect::to('/search')->with('flash_message', 'User not found');
             }
             $parts = Part::where('user_id', '=', $user->id)->get();
+            $img = Image::where('user_id', '=', $user->id)->get();
             return View::make('profile_template')
                 ->with('parts', $parts)
+                ->with('img', $img)
                 ->with('user', $user);
         }
         else

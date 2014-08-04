@@ -7,10 +7,17 @@
 @section('content')
 	<h1>Bike Swap :: {{ $user->username }}'s Profile</h1>
 	<br>
-	<a href='/'>Go Home</a><br>
+	<div class='row'>
+		<div class="col-md-2">
+			<a href='/'>Go Home</a><br>
 	@if(Auth::user() == $user)
-		<a href='/myprofile/edit'>Edit Profile</a><br>
+		<a href='/myprofile/edit'>Edit Profile</a>
 	@endif
+		</div>
+		<div class="col-md-4">
+			<img alt='profile' src={{ $img->url }} />
+		</div>
+	</div>
 	<h3>{{ $user->username }}'s Parts</h3><br>
 	<table class="table">
 	<tr>
