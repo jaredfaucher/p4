@@ -7,7 +7,7 @@
 @section('content')
 	<h1>Bike Swap :: Register</h1>
 	<br>
-	<a href='/'>Go Home</a><br>
+	<a href='/'>Go Home</a><br><br>
 
 	@foreach($errors->all() as $message)
         <div class='error'>{{ $message }}</div>
@@ -27,11 +27,10 @@
 			<div class="col-md-2">{{ Form::text('zip') }}</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">Password: </div>
-			<div class="col-md-2">{{ Form::password('password') }}<br>
-				<small>Min: 6</small>
-			</div>
+			<div class="col-md-2">Password: <small>(Min. 6)</small></div>
+			<div class="col-md-2">{{ Form::password('password') }}</div>
 		</div>
+		<br>
 		<div class="row">
 			<div class="col-md-2">{{ Form::submit('Register') }}</div>
 		</div>

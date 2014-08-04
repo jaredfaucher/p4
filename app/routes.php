@@ -20,6 +20,10 @@ Route::get('/myprofile/edit', 'ProfileController@getEdit');
 
 Route::post('/myprofile/edit', 'ProfileController@postEdit');
 
+Route::get('/myprofile/edit/add', 'ProfileController@getAddImage');
+
+Route::post('/myprofile/edit/add', 'ProfileController@postAddImage');
+
 Route::get('/profile/{username}', 'ProfileController@getProfile');
 
 Route::get('/add', 'PartsController@getAdd');

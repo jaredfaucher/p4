@@ -8,6 +8,8 @@
 	<h1>Bike Swap :: Edit {{ $user->username }}'s Profile</h1>
 	<br>
 	<a href='/'>Go Home</a><br>
+	<a href='/myprofile'>My Profile</a><br>
+	<a href='/myprofile/edit/add'>Add Profile Picture</a><br>
 	{{ Form::open(array('url' => '/myprofile/edit', 'method' => 'POST')) }}
 		<div class="row"><h3>Change Password</h3></div>
 		{{ Form::hidden('change', 'password') }}

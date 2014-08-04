@@ -125,6 +125,39 @@ class ProfileController extends BaseController {
         }
 	}
 
+    public function getAddImage()
+    {
+        if (Auth::user())
+        {
+            return View::make('add_image')
+                ->with('user', Auth::user());
+        }
+        else
+        {
+            return Redirect::to('/login')
+                ->with('flash_message', 'Please log in');
+        }       
+    }
+    public function postAddImage()
+    {
+        $file = Input::file('file');
+        $destinationPath = public_path().'tmp';
+        $filename = $file->getClientOriginalName();
+        
+        if (Input::file('file')->move($destinationPath, $filename))
+        {
+            $image = new Image;
+            $image->user_id = Auth::user()->id;       
+            $image->filename = $filename;
+            $image->size = $file->getMaxFilesize();
+
+        }
+        else
+        {
+            echo "bad stuff happened";
+        }
+
+    }
 	public function getProfile($username)
 	{
         if (Auth::user())
