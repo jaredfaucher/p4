@@ -7,10 +7,12 @@ class ProfileController extends BaseController {
 		if (Auth::user())
         {
             $parts = Part::where('user_id', '=', Auth::user()->id)->get();
-            $img = Image::where('user_id', '=', Auth::user()->id)->get();
+            $img = Image::where('user_id', '=', Auth::user()->id)->first();
+            $path = $img->path."\\";
+            $path = $path.$img->filename;
             return View::make('profile_template')
                 ->with('parts', $parts)
-                ->with('img', $img)
+                ->with('path', $path)
                 ->with('user', Auth::user());
         }
         else
@@ -143,7 +145,7 @@ class ProfileController extends BaseController {
     public function postAddImage()
     {
         $file = Input::file('file');
-        $destinationPath = public_path().'\storage\profile';
+        $destinationPath = public_path().'\profiles';
         $filename = $file->getClientOriginalName();
         
         if (Input::file('file')->move($destinationPath, $filename))
@@ -151,8 +153,12 @@ class ProfileController extends BaseController {
             $image = new Image;
             $image->user_id = Auth::user()->id;       
             $image->filename = $filename;
-            $image->size = $file->getSize();
+            $image->size = '';#$file->getSize();
             $image->path = $destinationPath;
+            $image->save();
+
+            print_r($image);
+            die();
 
         }
         else
