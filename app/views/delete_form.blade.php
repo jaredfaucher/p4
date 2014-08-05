@@ -13,7 +13,7 @@
 		<div class='error'>{{ $message }}</div>
 	@endforeach
 
-	<h3>{{ $user->username }}'s Images</h3><br>
+	<h3>{{ $user->username }}'s Pictures</h3><br>
 	<table class="table">
 	<tr>
 		<th>Title</th>

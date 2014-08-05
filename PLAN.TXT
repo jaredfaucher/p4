@@ -24,7 +24,7 @@ Bikeswap Plan:
 
 	-profile page customizability
 		x-change password, email, zipcode
-		-profile picture
+		x-profile picture
 		x-bike pictures
 		-social media?
 	x-part request

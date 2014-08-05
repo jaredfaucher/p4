@@ -12,6 +12,10 @@
 			<a href='/'>Go Home</a><br>
 	@if(Auth::user() == $user)
 		<a href='/myprofile/edit'>Edit Profile</a>
+	@else
+		<a href={{ '"/profile/'.$user->username.'/pictures"' }}>
+			{{$user->username}}'s Pictures
+		</a>
 	@endif
 		</div>
 		<div class="col-md-3">

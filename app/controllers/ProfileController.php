@@ -168,6 +168,29 @@ class ProfileController extends BaseController {
                 ->with('flash_message', 'Please log in');
         }		
 	}
+
+    public function getPictures($username)
+    {
+        if (Auth::user())
+        {
+            try {
+                $user = User::where('username', '=', $username)->firstOrFail();
+            }
+            catch(Exception $e) {
+                return Redirect::to('/search')->with('flash_message', 'User not found');
+            }
+            $images = Image::where('user_id', '=', $user->id)->get();
+            return View::make('pictures_display')
+                ->with('images', $images)
+                ->with('user', $user);
+        }
+        else
+        {
+            return Redirect::to('/login')
+                ->with('flash_message', 'Please log in');
+        }       
+    }
+
 	public function postRequest()
 	{
         $fromUser = Auth::user();

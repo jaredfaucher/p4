@@ -30,6 +30,8 @@ Route::post('/myprofile/edit/delete', 'ImageController@postDeleteImage');
 
 Route::get('/profile/{username}', 'ProfileController@getProfile');
 
+Route::get('/profile/{username}/pictures', 'ProfileController@getPictures');
+
 Route::get('/add', 'PartsController@getAdd');
 
 Route::post('/add', array('before' => 'csrf', 
