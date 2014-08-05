@@ -18,7 +18,9 @@ class CreateImagesTable extends Migration {
 			$table->integer('user_id')->unsigned();
 			$table->string('filename');
 			$table->string('size');
-			$table->string('path');
+			$table->string('title');
+			$table->string('description');
+			$table->string('url');
 
 			$table->foreign('user_id')->references('id')->on('users');
 		});

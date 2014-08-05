@@ -14,6 +14,14 @@
 		<div class="col-md-2">Where is your picture?: </div>
 		<div class="col-md-2">{{ Form::file('file') }} </div>
 	</div>
+	<div class="row">
+		<div class="col-md-2">Title: </div>
+		<div class="col-md-2">{{ Form::text('title') }} </div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">Description: </div>
+		<div class="col-md-2">{{ Form::text('description') }} </div>
+	</div>		
 	<br>
 	<div class="row">
 		<div class="col-md-2">{{ Form::submit('Upload Image') }}</div>

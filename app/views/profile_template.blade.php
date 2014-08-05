@@ -15,7 +15,7 @@
 	@endif
 		</div>
 		<div class="col-md-3">
-			<img id='profile_pic' alt='Bike Swap' src={{ $path }} />
+			<img id='profile_pic' alt='Bike Swap' src={{ $url }} />
 		</div>
 	</div>
 	<h3>{{ $user->username }}'s Parts</h3><br>

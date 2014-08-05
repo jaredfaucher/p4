@@ -13,3 +13,4 @@
 	-"barryvdh/laravel-debugbar": "1.*"
 	-http://www.techrecite.com/distance-formula-in-php-calculate-distance-between-two-points-programmatically/
 	-https://developers.google.com/maps/documentation/geocoding/
+	-"adyg/php-imgur-api-client": "dev-master"
