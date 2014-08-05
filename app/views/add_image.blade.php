@@ -15,6 +15,10 @@
 		<div class="col-md-2">{{ Form::file('file') }} </div>
 	</div>
 	<div class="row">
+		<div class="col-md-2">Profile Picture?: </div>
+		<div class="col-md-2">{{ Form::checkbox('profile', "true") }} </div>
+	</div>	
+	<div class="row">
 		<div class="col-md-2">Title: </div>
 		<div class="col-md-2">{{ Form::text('title') }} </div>
 	</div>

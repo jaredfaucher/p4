@@ -18,8 +18,10 @@ class CreateImagesTable extends Migration {
 			$table->integer('user_id')->unsigned();
 			$table->string('filename');
 			$table->string('size');
+			$table->boolean('profile');
 			$table->string('title');
 			$table->string('description');
+			$table->string('imgurId');
 			$table->string('url');
 
 			$table->foreign('user_id')->references('id')->on('users');

@@ -48,7 +48,7 @@ class PartsController extends BaseController {
         		->withInput();
     	}
 
-		return Redirect::to('/profile/{user}')
+		return Redirect::to('/myprofile')
 			->with('user', Auth::user()->username);
 	}
 
@@ -62,13 +62,13 @@ class PartsController extends BaseController {
     	}
     	# Fail
     	catch (Exception $e) {
-        	return Redirect::to('/profile/{user}')
+        	return Redirect::to('/myprofile')
         		->with('flash_message', 'Delete failed; please try again.')
         		->with('user', Auth::user()->username)
         		->withInput();
     	}
 
-		return Redirect::to('/profile/{user}')
+		return Redirect::to('/myprofile')
 			->with('user', Auth::user()->username);
 	}
 

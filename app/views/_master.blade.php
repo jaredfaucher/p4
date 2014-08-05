@@ -6,7 +6,7 @@
 			@yield('title', 'Bike Swap')
 		</title>
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/p4.css">
+		{{ HTML::style('css/p4.css'); }}
 	</head>
 	<body>
 		@if(Session::get('flash_message'))

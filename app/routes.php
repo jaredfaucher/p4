@@ -20,9 +20,13 @@ Route::get('/myprofile/edit', 'ProfileController@getEdit');
 
 Route::post('/myprofile/edit', 'ProfileController@postEdit');
 
-Route::get('/myprofile/edit/add', 'ProfileController@getAddImage');
+Route::get('/myprofile/edit/add', 'ImageController@getAddImage');
 
-Route::post('/myprofile/edit/add', 'ProfileController@postAddImage');
+Route::post('/myprofile/edit/add', 'ImageController@postAddImage');
+
+Route::get('/myprofile/edit/delete', 'ImageController@getDeleteImage');
+
+Route::post('/myprofile/edit/delete', 'ImageController@postDeleteImage');
 
 Route::get('/profile/{username}', 'ProfileController@getProfile');
 

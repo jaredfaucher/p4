@@ -9,7 +9,8 @@
 	<br>
 	<a href='/'>Go Home</a><br>
 	<a href='/myprofile'>My Profile</a><br>
-	<a href='/myprofile/edit/add'>Add Profile Picture</a><br>
+	<a href='/myprofile/edit/add'>Add Picture to profile</a><br>
+	<a href='/myprofile/edit/delete'>Delete Picture from profile</a><br>
 	{{ Form::open(array('url' => '/myprofile/edit', 'method' => 'POST')) }}
 		<div class="row"><h3>Change Password</h3></div>
 		{{ Form::hidden('change', 'password') }}
