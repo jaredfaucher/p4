@@ -1,7 +1,7 @@
 <?php
 
-class ImageController extends BaseController {
-
+class ImageController extends BaseController 
+{
 	public function getAddImage()
     {
         if (Auth::user())
@@ -18,23 +18,22 @@ class ImageController extends BaseController {
 
     public function postAddImage()
     {
-        # set up imgur connection
-        $client = new \Imgur\Client();
-        $client->setOption('client_id', 'd6c1ad7da60dc22');
-        $client->setOption('client_secret', 'f3d89c626d4a3ce5a41e23351400e942d79542a6');
+        require 'helpers\image_helper.php';
+       	
+       	$rules = array(
+                'file' => 'required|image',
+                'title' => 'required',
+                'description' => 'required'
+            );
 
-        if (isset($_SESSION['token'])) {
-            $client->setAccessToken($_SESSION['token']);
-            if($client->checkAccessTokenExpired()) {
-                $client->refreshToken();
-            }
-        }
-        elseif (isset($_GET['code'])) {
-                $client->requestAccessToken($_GET['code']);
-                $_SESSION['token'] = $client->getAccessToken();
-        }
-        else {
-            echo '<a href="'.$client->getAuthenticationUrl().'">Click to authorize</a>';
+       	$validator = Validator::make(Input::all(), $rules);
+
+       	if ($validator->fails())
+        {
+            return Redirect::to('/myprofile/edit/add')
+                ->with('flash_message', 'Add failed, please fix errors and try again')
+                ->withInput()
+                ->withErrors($validator);
         }
         
         # get file from upload and put in tmp folder
@@ -122,24 +121,7 @@ class ImageController extends BaseController {
 
     public function postDeleteImage()
     {
-    	# set up imgur connection
-        $client = new \Imgur\Client();
-        $client->setOption('client_id', 'd6c1ad7da60dc22');
-        $client->setOption('client_secret', 'f3d89c626d4a3ce5a41e23351400e942d79542a6');
-
-        if (isset($_SESSION['token'])) {
-            $client->setAccessToken($_SESSION['token']);
-            if($client->checkAccessTokenExpired()) {
-                $client->refreshToken();
-            }
-        }
-        elseif (isset($_GET['code'])) {
-                $client->requestAccessToken($_GET['code']);
-                $_SESSION['token'] = $client->getAccessToken();
-        }
-        else {
-            echo '<a href="'.$client->getAuthenticationUrl().'">Click to authorize</a>';
-        }
+        require 'helpers\image_helper.php';
 
     	$id = Input::get('id');
     	$image = Image::find($id);

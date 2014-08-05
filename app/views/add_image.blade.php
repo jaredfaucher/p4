@@ -31,3 +31,4 @@
 		<div class="col-md-2">{{ Form::submit('Upload Image') }}</div>
 	</div>
 	{{ Form::close() }}
+@stop
