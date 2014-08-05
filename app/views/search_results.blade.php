@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<h1>Bike Swap :: Seach Results</h1>
+	<h1 id="title">Bike Swap :: Seach Results</h1>
 	<br>
 	<a href='/'>Go Home</a><br>
 	@if(!empty($parts))

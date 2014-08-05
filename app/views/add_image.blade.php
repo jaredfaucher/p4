@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<h1>Bike Swap :: Edit {{ $user->username }}'s Profile</h1>
+	<h1 id="title">Bike Swap :: Edit {{ $user->username }}'s Profile</h1>
 	<br>
 	<a href='/'>Go Home</a><br>
 	<a href='/myprofile'>My Profile</a><br>

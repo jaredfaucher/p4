@@ -1,11 +1,20 @@
+.container{
+	width: 800px;
+}
+
 .flash-message{
 	text-align: center;
 	background-color: yellow;
 	text-decoration: bold;
+	width: 800px;
 }
 
 #profile_pic{
-	width: 400px;
+	width: 300px;
+}
+
+#title{
+	text-align: center;
 }
 
 .preview {

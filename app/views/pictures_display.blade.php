@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<h1>Bike Swap :: {{ $user->username }}'s Pictures</h1>
+	<h1 id="title">Bike Swap :: {{ $user->username }}'s Pictures</h1>
 	<br>
 	<div class='row'>
 		<div class="col-md-3">
