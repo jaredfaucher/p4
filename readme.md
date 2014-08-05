@@ -9,8 +9,9 @@
 ## Details:
 
 ## Plugins/Libraries/Etc:
-	-Bootstrap
-	-"barryvdh/laravel-debugbar": "1.*"
-	-http://www.techrecite.com/distance-formula-in-php-calculate-distance-between-two-points-programmatically/
-	-https://developers.google.com/maps/documentation/geocoding/
-	-"adyg/php-imgur-api-client": "dev-master"
+	-Bootstrap:  http://getbootstrap.com/
+	-Laravel 4 Debugbar:  https://github.com/barryvdh/laravel-debugbar
+	-PHP Imgur API Client:  https://github.com/Adyg/php-imgur-api-client/tree/master
+	-Imgur API:  https://api.imgur.com/
+	-Google Geocoding API: https://developers.google.com/maps/documentation/geocoding/  
+	-Distance Formular: http://www.techrecite.com/distance-formula-in-php-calculate-distance-between-two-points-programmatically/
