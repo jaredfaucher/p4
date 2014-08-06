@@ -4,7 +4,8 @@ class PartTableSeeder extends Seeder {
 
     public function run()
     {
-        ######### Username: mattpelaggi from http://www.pedalroom.com/bike/surly-steamroller-19004	    
+        ######### Username: mattpelaggi 
+        ######### From: http://www.pedalroom.com/bike/surly-steamroller-19004	    
         $part = Part::create(array(
             'type' => 'Frame',
             'part_name' => '2013 Surly Steamroller 53cm',

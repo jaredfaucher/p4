@@ -17,17 +17,20 @@ Bikeswap Plan:
 
 -Profile page
 	x-looking at other user's profiles
-		x-displays email to contact them about their bike parts
+		x-displays bike parts
+		x-displays profile picture, link to other pictures
+		x-can request part from user
+			x-sends user an email with the requestor's information so they can reply if they are interested
 	x-My profile page
 		x-add bike parts to profile & database
 		x-remove bike parts from profile & database
-		-FIX DISPLAY OF PART TYPE
 
-	-profile page customizability
+	x-profile page customizability
 		x-change password, email, zipcode
 		x-profile picture
+			x-adds picture to database and uploads to imgur
 		x-bike pictures
-		-social media?
+			x-adds picture to database and uploads to imgur
 	x-part request
 		x-sends email to the user stating that someone in interested
 
@@ -35,3 +38,4 @@ Bikeswap Plan:
 	x-display all users within x mile radius
 	x-ability to search for part names
 		x-other filters
+	x-search for user's by username
