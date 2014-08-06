@@ -29,9 +29,8 @@
 		</div>
 	</div>
 	<h3 class="title">{{ $user->username }}'s Parts</h3><br>
-	<div id="tableContainer">
-	<table class="table">
-		<thead class="fixedHeader">
+	<table class="table table-striped">
+		<thead>
 			<tr>
 				<th>Type</th>
 				<th>Name</th>
@@ -42,19 +41,19 @@
 				@endif
 			</tr>
 		</thead>
-	<tbody class="scrollContent">
+	<tbody>
 	@foreach ($parts as $part)
 		<tr>
-			<td>{{ $part->type }}</td>
-			<td>{{ $part->part_name }}</td>
+			<td class="filterable-cell">{{ $part->type }}</td>
+			<td class="filterable-cell">{{ $part->part_name }}</td>
 			@if(Auth::user() == $user)
 			{{ Form::open(array('url' => '/delete', 'method' => 'POST')) }}
-			<td>
+			<td class="filterable-cell">
 				{{ Form::radio('id', $part->id) }}
 			</td>
 			@else
 			{{ Form::open(array('url' => '/request', 'method' => 'POST')) }}
-			<td>
+			<td class="filterable-cell">
 				{{ Form::radio('id', $part->id) }}
 			</td>
 			@endif

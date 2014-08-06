@@ -18,20 +18,20 @@
 		</div>
 	</div>
 	<h3>{{ $user->username }}'s Pictures</h3><br>
-	<table class="table">
-		<thead class="fixedHeader">
+	<table class="table table-striped">
+		<thead>
 			<tr>
 				<th>Title</th>
 				<th>Description</th>
 				<th>Preview</th>
 			</tr>
 		</thead>
-		<tbody class="scrollContent">
+		<tbody>
 			@foreach ($images as $image)
 			<tr>
-				<td>{{ $image->title }}</td>
-				<td>{{ $image->description }}</td>
-				<td>
+				<td class="filterable-cell">{{ $image->title }}</td>
+				<td class="filterable-cell">{{ $image->description }}</td>
+				<td class="filterable-cell">
 					<a href={{ $image->url }}>
 						<img class="preview" src={{ $image->url }} />
 					</a>

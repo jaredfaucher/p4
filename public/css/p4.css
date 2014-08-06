@@ -24,59 +24,36 @@
 div.row a {
 	text-align: center;
 }
-div.tableContainer{
-	clear: both;
-	border: 1px solid black;
-	height: 500px;
-	overflow: auto;
-	width: 770px;
-}
-div.tableContainer table {
-	width: 770px;
-}
-thead.fixedHeader tr {
-	position: relative;
-}
+
 table {
-	display: block;
-}
-thead.fixedHeader {
-	display: block;
-}
-tbody.scrollContent {
-	display: block;
-	height: 400px;
-	overflow: auto;
 	width: 100%;
 }
-thead.fixedHeader th {
-	width: 335px;
+thead, tbody, tr, td, th {
+	display: block;
 }
-thead.fixedHeader th + th {
-	width: 335px;
+tr:after {
+	content: ' ';
+	display: block;
+	visibility: hidden;
+	clear: both;
 }
-thead.fixedHeader th + th + th {
-	width: 100px;
+thead th {
+    height: 30px;
+
+    /*text-align: left;*/
 }
-tbody.scrollContent td {
-	width: 335px;
+
+tbody {
+    height: 400px;
+    overflow-y: auto;
 }
-tbody.scrollContent td + td {
-	width: 335px;
+
+thead {
+    /* fallback */
 }
-tbody.scrollContent td + td + td {
-	width: 100px;
-	text-align: right;
-}
-tbody td {
-	width: 335px;
-}
-tbody td + td {
-	width: 335px;
-}
-tbody td + td + td {
-	width: 100px;
-}
-tbody td + td + td .radio{
-	vertical-align: middle;
+
+
+tbody td, thead th {
+    width: 33.3%;
+    float: left;
 }

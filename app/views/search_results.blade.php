@@ -9,20 +9,20 @@
 	<br>
 	<a href='/'>Go Home</a><br>
 	@if(!empty($parts))
-		<table class="table">
-			<thead class="fixedHeader">
+		<table class="table table-striped">
+			<thead>
 			<tr>
 				<th>Type</th>
 				<th>Name</th>
 				<th>User</th>
 			</tr>
 			</thead>
-			<tbody class="scrollContent">
+			<tbody>
 			@foreach ($parts as $part)
 				<tr>
-					<td>{{ $part->type }}</td>
-					<td>{{ $part->part_name }}</td>
-					<td>
+					<td class="filterable-cell">{{ $part->type }}</td>
+					<td class="filterable-cell">{{ $part->part_name }}</td>
+					<td class="filterable-cell">
 						<a href={{ '"/profile/'.$usernames[$part->id].'"' }}>
 							{{ $usernames[$part->id] }}
 						</a>
@@ -32,47 +32,47 @@
 			</tbody>
 		</table>	
 	@elseif(!empty($closeUsers))
-		<table class="table">
-			<thead class="fixedHeader">
+		<table class="table table-striped">
+			<thead>
 			<tr>
 				<th>Username</th>
 				<th>Email</th>
 				<th>Zip Code</th>
 			</tr>
 			</thead>
-			<tbody class="scrollContent">
+			<tbody>
 			@foreach ($closeUsers as $user)
 			<tr>
-				<td>
+				<td class="filterable-cell">
 					<a href={{ '"/profile/'.$user->username.'"' }}>
 						{{ $user->username }}
 					</a>
 				</td>
-				<td>{{ $user->email }}</td>
-				<td>{{ $user->zip }}</td>
+				<td class="filterable-cell">{{ $user->email }}</td>
+				<td class="filterable-cell">{{ $user->zip }}</td>
 			</tr>
 			@endforeach
 			</tbody>
 		</table>
 	@elseif(!empty($users))
-		<table class="table">
-			<thead class="fixedHeader">
+		<table class="table table-striped">
+			<thead>
 			<tr>
 				<th>Username</th>
 				<th>Email</th>
 				<th>Zip Code</th>
 			</tr>
 			</thead>
-			<tbody class="scrollContent">
+			<tbody>
 			@foreach ($users as $user)
 			<tr>
-				<td>
+				<td class="filterable-cell">
 					<a href={{ '"/profile/'.$user->username.'"' }}>
 						{{ $user->username }}
 					</a>
 				</td>
-				<td>{{ $user->email }}</td>
-				<td>{{ $user->zip }}</td>
+				<td class="filterable-cell">{{ $user->email }}</td>
+				<td class="filterable-cell">{{ $user->zip }}</td>
 			</tr>
 			@endforeach
 			</tbody>
