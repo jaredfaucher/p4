@@ -18,7 +18,7 @@ class ImageController extends BaseController
 
     public function postAddImage()
     {
-        require 'helpers\image_helper.php';
+        require app_path().'\controllers\helpers\image_helper.php';
        	
        	$rules = array(
                 'file' => 'required|image',
