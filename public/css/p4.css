@@ -5,13 +5,10 @@
 .flash-message{
 	text-align: center;
 	background-color: yellow;
-	text-decoration: bold;
-	width: 800px;
 }
 
 #profile_pic{
 	width: 450px;
-	vertical-align: middle;
 }
 
 .title{
@@ -21,10 +18,9 @@
 .preview {
 	width: 100px;
 }
-div.row a {
-	text-align: center;
+input, select {
+	width: 150px;
 }
-
 table {
 	width: 100%;
 }
@@ -52,8 +48,12 @@ thead {
     /* fallback */
 }
 
-
 tbody td, thead th {
-    width: 33.3%;
     float: left;
+}
+.three-column {
+	width: 33.3%;
+}
+.five-column {
+	width: 20%;
 }

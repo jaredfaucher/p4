@@ -9,10 +9,10 @@
 		{{ HTML::style('css/p4.css'); }}
 	</head>
 	<body>
-		@if(Session::get('flash_message'))
-			<div class='flash-message'>{{ Session::get('flash_message') }}</div>
-		@endif
 		<div class="container">
+			@if(Session::get('flash_message'))
+				<div class='flash-message text-center'>{{ Session::get('flash_message') }}</div>
+			@endif
 			@yield('content')
 		</div>
 	</body>
