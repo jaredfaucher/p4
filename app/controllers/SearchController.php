@@ -22,7 +22,19 @@ class SearchController extends BaseController {
         $username = Input::get('username');
         if (empty($distanceAway) && empty($username))
     	{
-        	$query = '%'.$query.'%';
+        	$rules = array(
+                'query' => 'required');
+            $validator = Validator::make(array($query), $rules);
+
+            if ($validator->fails())
+            {
+                return Redirect::to('/search')
+                    ->with('flash_message', 'Search failed, please fix errors and try again')
+                    ->withInput()
+                    ->withErrors($validator);
+            }
+
+            $query = '%'.$query.'%';
             $type = Input::get('type');
         	if ($type == 'any')
             {
@@ -47,8 +59,21 @@ class SearchController extends BaseController {
     	}
     	elseif (empty($query) && empty($username))
     	{
+            $rules = array(
+                'distanceAway' => 'required');
+            $validator = Validator::make(array($distanceAway), $rules);
+
+            if ($validator->fails())
+            {
+                return Redirect::to('/search')
+                    ->with('flash_message', 'Search failed, please fix errors and try again')
+                    ->withInput()
+                    ->withErrors($validator);
+            }
+
+
             # Search Helper Functions
-            /*function getCoordinates($zip)
+            function getCoordinates($zip)
             {
                 $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
                 $json = file_get_contents($url);
@@ -65,9 +90,10 @@ class SearchController extends BaseController {
                 $miles = rad2deg($miles);
                 $miles = $miles * 60 * 1.1515;
                 return $miles; 
-            }*/
+            }
             
-            if (App::environment() == 'production')
+            # Unsuccessful attempt to fix helpers problem
+            /*if (App::environment() == 'production')
             {
                 set_include_path(get_include_path() . PATH_SEPARATOR . $_ENV['OPENSHIFT_REPO_DIR']);
                 include 'app\controllers\helpers\search_helper.php';
@@ -75,7 +101,7 @@ class SearchController extends BaseController {
             else
             {
                 include app_path().'\controllers\helpers\search_helper.php';
-            }
+            }*/
 
             $coordinates1 = getCoordinates(Auth::user()->zip);
         	$users = User::all();
@@ -114,6 +140,17 @@ class SearchController extends BaseController {
     	}
         else
         {
+            $rules = array(
+                'username' => 'required');
+            $validator = Validator::make(array($username), $rules);
+
+            if ($validator->fails())
+            {
+                return Redirect::to('/search')
+                    ->with('flash_message', 'Search failed, please provide input and try again')
+                    ->withInput()
+                    ->withErrors($validator);
+            }            
             $username = '%'.$username.'%';
             $users = User::where('username', 'LIKE', '%'.$username.'%')->get();
             return View::make('search_results')
