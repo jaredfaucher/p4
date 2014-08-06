@@ -29,7 +29,7 @@ class SearchController extends BaseController {
             if ($validator->fails())
             {
                 return Redirect::to('/search')
-                    ->with('flash_message', 'Search failed, please fix errors and try again')
+                    ->with('flash_message', 'Search failed, provide input and try again')
                     ->withInput()
                     ->withErrors($validator);
             }
@@ -66,7 +66,7 @@ class SearchController extends BaseController {
             if ($validator->fails())
             {
                 return Redirect::to('/search')
-                    ->with('flash_message', 'Search failed, please fix errors and try again')
+                    ->with('flash_message', 'Search failed, provide input and try again')
                     ->withInput()
                     ->withErrors($validator);
             }
