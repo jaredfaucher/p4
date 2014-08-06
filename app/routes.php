@@ -1,5 +1,6 @@
 <?php
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 Route::get('/', 'HomeController@getIndex');
 
 Route::get('/register', 'RegisterController@getRegister');
