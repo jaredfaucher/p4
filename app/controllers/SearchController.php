@@ -48,7 +48,7 @@ class SearchController extends BaseController {
     	elseif (empty($query) && empty($username))
     	{
             # Search Helper Functions
-            function getCoordinates($zip)
+            /*function getCoordinates($zip)
             {
                 $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
                 $json = file_get_contents($url);
@@ -65,8 +65,17 @@ class SearchController extends BaseController {
                 $miles = rad2deg($miles);
                 $miles = $miles * 60 * 1.1515;
                 return $miles; 
+            }*/
+            
+            if (App::environment() == 'production')
+            {
+                set_include_path(get_include_path() . PATH_SEPARATOR . $_ENV['OPENSHIFT_REPO_DIR']);
+                include app_path().'\controllers\helpers\search_helper.php'; 
             }
-            #require app_path().'\controllers\helpers\search_helper.php';
+            else
+            {
+                include app_path().'\controllers\helpers\search_helper.php';
+            }
 
             $coordinates1 = getCoordinates(Auth::user()->zip);
         	$users = User::all();

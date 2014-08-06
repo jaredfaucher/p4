@@ -21,7 +21,7 @@ class ImageController extends BaseController
         # Image Controller Helper
 
         # set up imgur connection
-        $client = new \Imgur\Client();
+        /*$client = new \Imgur\Client();
         $client->setOption('client_id', 'd6c1ad7da60dc22');
         $client->setOption('client_secret', 'f3d89c626d4a3ce5a41e23351400e942d79542a6');
 
@@ -41,9 +41,17 @@ class ImageController extends BaseController
         else 
         {
             echo '<a href="'.$client->getAuthenticationUrl().'">Click to authorize</a>';
-        } 
-
-        #require app_path().'\controllers\helpers\image_helper.php';
+        }*/ 
+        
+        if (App::environment() == 'production')
+        {
+            set_include_path(get_include_path() . PATH_SEPARATOR . $_ENV['OPENSHIFT_REPO_DIR']);
+            include app_path().'\controllers\helpers\image_helper.php'; 
+        }
+        else
+        {
+            include app_path().'\controllers\helpers\image_helper.php';
+        }
        	
        	$rules = array(
                 'file' => 'required|image',
