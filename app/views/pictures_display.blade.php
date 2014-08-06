@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<h1 id="title">Bike Swap :: {{ $user->username }}'s Pictures</h1>
+	<h1 class="title">Bike Swap :: {{ $user->username }}'s Pictures</h1>
 	<br>
 	<div class='row'>
 		<div class="col-md-3">
@@ -19,22 +19,25 @@
 	</div>
 	<h3>{{ $user->username }}'s Pictures</h3><br>
 	<table class="table">
-	<tr>
-		<th>Title</th>
-		<th>Description</th>
-		<th>Preview</th>
-	</tr>
-	@foreach ($images as $image)
-	<tr>
-		<td>{{ $image->title }}</td>
-		<td>{{ $image->description }}</td>
-		<td>
-			<a href={{ $image->url }}>
-				<img class="preview" src={{ $image->url }} />
-			</a>
-		</td>
-	</tr>
-	@endforeach
+		<thead class="fixedHeader">
+			<tr>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Preview</th>
+			</tr>
+		</thead>
+		<tbody class="scrollContent">
+			@foreach ($images as $image)
+			<tr>
+				<td>{{ $image->title }}</td>
+				<td>{{ $image->description }}</td>
+				<td>
+					<a href={{ $image->url }}>
+						<img class="preview" src={{ $image->url }} />
+					</a>
+				</td>
+			</tr>
+			@endforeach
+		</tbody>
 	</table>
-
 @stop

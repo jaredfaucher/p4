@@ -5,51 +5,62 @@
 @stop
 
 @section('content')
-	<h1 id="title">Bike Swap :: {{ $user->username }}'s Profile</h1>
+	<h1 class="title">Bike Swap :: {{ $user->username }}'s Profile</h1>
 	<br>
 	<div class='row'>
-		<div class="col-md-3">
-			<a href='/'>Go Home</a><br>
-	@if(Auth::user() == $user)
-		<a href='/myprofile/edit'>Edit Profile</a>
-	@else
-		<a href={{ '"/profile/'.$user->username.'/pictures"' }}>
-			{{$user->username}}'s Pictures
-		</a>
-	@endif
+		<div class="col-md-5">
+			<a href='/'>Go Home</a>
 		</div>
-		<div class="col-md-3">
+	@if(Auth::user() == $user)
+		<div class="col-md-5">
+			<a href='/myprofile/edit'>Edit Profile</a>
+		</div>
+	@else
+		<div class="col-md-5">
+			<a href={{ '"/profile/'.$user->username.'/pictures"' }}>
+				{{$user->username}}'s Pictures
+			</a>
+		</div>
+	@endif
+	</div>
+	<div class='row'>
+		<div class="col-md-8">
 			<img id='profile_pic' alt='Bike Swap' src={{ $url }} />
 		</div>
 	</div>
-	<h3>{{ $user->username }}'s Parts</h3><br>
+	<h3 class="title">{{ $user->username }}'s Parts</h3><br>
+	<div id="tableContainer">
 	<table class="table">
-	<tr>
-		<th>Type</th>
-		<th>Name</th>
-		@if(Auth::user() == $user)
-		<th>Remove?</th>
-		@else
-		<th>Interested?</th>
-		@endif
-	</tr>
+		<thead class="fixedHeader">
+			<tr>
+				<th>Type</th>
+				<th>Name</th>
+				@if(Auth::user() == $user)
+				<th>Remove?</th>
+				@else
+				<th>Interested?</th>
+				@endif
+			</tr>
+		</thead>
+	<tbody class="scrollContent">
 	@foreach ($parts as $part)
-	<tr>
-		<td>{{ $part->type }}</td>
-		<td>{{ $part->part_name }}</td>
-		@if(Auth::user() == $user)
-		{{ Form::open(array('url' => '/delete', 'method' => 'POST')) }}
-		<td>
-			{{ Form::radio('id', $part->id) }}
-		</td>
-		@else
-		{{ Form::open(array('url' => '/request', 'method' => 'POST')) }}
-		<td>
-			{{ Form::radio('id', $part->id) }}
-		</td>
-		@endif
-	</tr>
+		<tr>
+			<td>{{ $part->type }}</td>
+			<td>{{ $part->part_name }}</td>
+			@if(Auth::user() == $user)
+			{{ Form::open(array('url' => '/delete', 'method' => 'POST')) }}
+			<td>
+				{{ Form::radio('id', $part->id) }}
+			</td>
+			@else
+			{{ Form::open(array('url' => '/request', 'method' => 'POST')) }}
+			<td>
+				{{ Form::radio('id', $part->id) }}
+			</td>
+			@endif
+		</tr>
 	@endforeach
+	</tbody>
 	@if(Auth::user() == $user)
 	<tr>
 		<td>
@@ -72,5 +83,6 @@
 	</tr>
 	@endif
 	</table>
+	</div>
 
 @stop

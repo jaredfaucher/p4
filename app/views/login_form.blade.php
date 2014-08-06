@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<h1 id="title">Bike Swap :: Login</h1>
+	<h1 class="title">Bike Swap :: Login</h1>
 	<br>
 	<a href='/'>Go Home</a><br><br>
     

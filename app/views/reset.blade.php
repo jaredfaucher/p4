@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<h1 id="title">Bike Swap :: Reset Password</h1>
+	<h1 class="title">Bike Swap :: Reset Password</h1>
 	<br>
 	<a href='/'>Go Home</a><br>
 

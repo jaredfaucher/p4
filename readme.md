@@ -23,3 +23,4 @@
 	-Imgur API:  https://api.imgur.com/
 	-Google Geocoding API: https://developers.google.com/maps/documentation/geocoding/  
 	-Distance Formula: http://www.techrecite.com/distance-formula-in-php-calculate-distance-between-two-points-programmatically/
+	-Reddit:  Asked users on Reddit for their bike builds in order to seed my database

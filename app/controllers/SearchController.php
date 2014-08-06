@@ -16,8 +16,10 @@ class SearchController extends BaseController {
 	}
 	public function postSearch()
 	{
-		$query = Input::get('query');
-    	if (!empty($query))
+    	$query = Input::get('query');
+        $distanceAway = Input::get('distanceAway');
+        $username = Input::get('username');
+        if (empty($distanceAway) && empty($username))
     	{
         	$query = '%'.$query.'%';
             $type = Input::get('type');
@@ -42,11 +44,10 @@ class SearchController extends BaseController {
                 ->with('usernames', $usernames);
 
     	}
-    	elseif (!empty($distanceAway))
+    	elseif (empty($query) && empty($username))
     	{
             require 'helpers\search_helper.php';
 
-            $distanceAway = Input::get('distanceAway');
             $coordinates1 = getCoordinates(Auth::user()->zip);
         	$users = User::all();
         	$i = 0;
@@ -55,7 +56,7 @@ class SearchController extends BaseController {
         	{
             	if ($user->id == Auth::user()->id)
             	{
-                	continue;
+                    continue;
             	}
             	else
             	{
@@ -64,9 +65,9 @@ class SearchController extends BaseController {
                                                          $coordinates1['long'], 
                                                          $coordinates2['lat'],
                                                          $coordinates2['long']);
-                	if ($distanceBetween <= $distanceAway)
+                    if ($distanceBetween <= $distanceAway)
                 	{
-                    	$closeUsers[$i] = $user;
+                        $closeUsers[$i] = $user;
                     	$i++;
                 	}
             	}
@@ -84,7 +85,6 @@ class SearchController extends BaseController {
     	}
         else
         {
-            $username = Input::get('username');
             $username = '%'.$username.'%';
             $users = User::where('username', 'LIKE', '%'.$username.'%')->get();
             return View::make('search_results')

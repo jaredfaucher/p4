@@ -5,35 +5,42 @@
 @stop
 
 @section('content')
-	<h1 id="title">Bike Swap :: Seach Results</h1>
+	<h1 class="title">Bike Swap :: Seach Results</h1>
 	<br>
 	<a href='/'>Go Home</a><br>
 	@if(!empty($parts))
 		<table class="table">
+			<thead class="fixedHeader">
 			<tr>
 				<th>Type</th>
 				<th>Name</th>
 				<th>User</th>
 			</tr>
+			</thead>
+			<tbody class="scrollContent">
 			@foreach ($parts as $part)
-			<tr>
-				<td>{{ $part->type }}</td>
-				<td>{{ $part->part_name }}</td>
-				<td>
-					<a href={{ '"/profile/'.$usernames[$part->id].'"' }}>
-						{{ $usernames[$part->id] }}
-					</a>
-				</td>
-			</tr>
+				<tr>
+					<td>{{ $part->type }}</td>
+					<td>{{ $part->part_name }}</td>
+					<td>
+						<a href={{ '"/profile/'.$usernames[$part->id].'"' }}>
+							{{ $usernames[$part->id] }}
+						</a>
+					</td>
+				</tr>
 			@endforeach
+			</tbody>
 		</table>	
 	@elseif(!empty($closeUsers))
 		<table class="table">
+			<thead class="fixedHeader">
 			<tr>
 				<th>Username</th>
 				<th>Email</th>
 				<th>Zip Code</th>
 			</tr>
+			</thead>
+			<tbody class="scrollContent">
 			@foreach ($closeUsers as $user)
 			<tr>
 				<td>
@@ -45,14 +52,18 @@
 				<td>{{ $user->zip }}</td>
 			</tr>
 			@endforeach
+			</tbody>
 		</table>
 	@elseif(!empty($users))
 		<table class="table">
+			<thead class="fixedHeader">
 			<tr>
 				<th>Username</th>
 				<th>Email</th>
 				<th>Zip Code</th>
 			</tr>
+			</thead>
+			<tbody class="scrollContent">
 			@foreach ($users as $user)
 			<tr>
 				<td>
@@ -64,6 +75,7 @@
 				<td>{{ $user->zip }}</td>
 			</tr>
 			@endforeach
+			</tbody>
 		</table>	
 	@elseif(empty($users))
 		<h3>There are no users matching that criteria.  Try again!</h3>
