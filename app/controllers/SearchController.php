@@ -70,7 +70,7 @@ class SearchController extends BaseController {
             if (App::environment() == 'production')
             {
                 set_include_path(get_include_path() . PATH_SEPARATOR . $_ENV['OPENSHIFT_REPO_DIR']);
-                include app_path().'\controllers\helpers\search_helper.php'; 
+                include 'app\controllers\helpers\search_helper.php';
             }
             else
             {

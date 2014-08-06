@@ -46,7 +46,7 @@ class ImageController extends BaseController
         if (App::environment() == 'production')
         {
             set_include_path(get_include_path() . PATH_SEPARATOR . $_ENV['OPENSHIFT_REPO_DIR']);
-            include app_path().'\controllers\helpers\image_helper.php'; 
+            include 'app\controllers\helpers\image_helper.php'; 
         }
         else
         {
