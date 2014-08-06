@@ -19,25 +19,16 @@
 			<div class="col-md-2">Type (optional): </div>
 			<div class="col-md-2">{{ Form::select('type', array('any' => 'Any',
 									  'frame' => 'Frame', 
-									  'fork' => 'Fork',
-									  'headset' => 'Headset',
-									  'crankset' => 'Crankset',
-									  'bracket' => 'Bracket',
-									  'pedals' => 'Pedals',
-									  'cog' => 'Cog',
-									  'chain' => 'Chain',
-									  'hub' => 'Hub',
-									  'spokes' => 'Spokes',
-									  'rims' => 'Rim',
-									  'tire' => 'Tire',
-									  'brake' => 'Brake',
-									  'brake_lever' => 'Brake Lever',
-									  'handlebar' => 'Handlebar',
-									  'stem' => 'Stem',
-									  'grip' => 'Grip',
-									  'saddle' => 'Saddle',
-									  'seat_post' => 'Seat Post',
-									  'seat_clamp' => 'Seat Clamp'), 'all') }}</div>
+									  'fork_headset' => 'Fork/Headset',
+									  'crankset_bracket' => 'Crankset/Bottom Bracket',
+									  'pedals_straps' => 'Pedals/Straps',
+									  'drive_cog_chainring' => 'Drivetrain/Cog/Chainring/Chain',
+									  'front_hub_wheel_tire' => 'Front Wheel/Hub/Tire',
+									  'back_hub_wheel_tire' => 'Back Wheel/Hub/Tire',
+									  'brake_lever' => 'Brake/Brake Lever',
+									  'handlebar_stem_grip' => 'Handlebar/Grip/Stem',
+									  'saddle_seat' => 'Saddle/Seatpost/Clamp',
+									  'accessories' => 'Accessories')) }}, 'any') }}</div>
 		</div>
 		<br>
 		<div class="row">

@@ -21,6 +21,7 @@ Bikeswap Plan:
 	x-My profile page
 		x-add bike parts to profile & database
 		x-remove bike parts from profile & database
+		-FIX DISPLAY OF PART TYPE
 
 	-profile page customizability
 		x-change password, email, zipcode
