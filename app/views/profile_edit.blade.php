@@ -17,10 +17,10 @@
 			<a href='/myprofile'>My Profile</a>
 		</div>
 		<div class="col-md-2">
-			<a href='/myprofile/edit/add'>Add Picture to profile</a>
+			<a href='/search'>Search Users or Parts</a>
 		</div>
 		<div class="col-md-2">
-			<a href='/myprofile/edit/delete'>Delete Picture from profile</a>
+			<a href='/logout'>Log out</a>
 		</div>
 		<div class="col-md-2"></div>
 	</div>

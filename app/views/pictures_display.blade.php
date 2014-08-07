@@ -29,7 +29,9 @@
    	</div>
    	@if(Auth::user() != $user)
 	<div class="col-md-2">
-		<a href={{ '"/profile/'.$user->username.'"' }}>Back to Profile</a>
+		<a href={{ '"/profile/'.$user->username.'"' }}>
+			Back to {{ $user->username }}'s Profile
+		</a>
 	</div>
 	<div class="col-md-1"></div>
 	@else
@@ -39,6 +41,18 @@
 <div class="row text-center">
 	<h3>{{ $user->username }}'s Pictures</h3>
 </div>
+@if(Auth::user() == $user)
+<div class='row text-center'>
+	<div class="col-md-4"></div>
+	<div class="col-md-2">
+		<a href="/myprofile/edit/add">Add pictures</a>
+	</div>
+	<div class="col-md-2">
+		<a href="/myprofile/edit/delete">Delete pictures</a>
+	</div>
+	<div class="col-md-4"></div>
+</div>
+@endif
 <table class="table table-striped">
 	<thead>
 		<tr>
