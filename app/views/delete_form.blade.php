@@ -67,11 +67,11 @@
 	@endforeach
 	</tbody>
 		<tr>
-			<td class="five-column"></td>
-			<td class="five-column"></td>
-			<td class="five-column"></td>
-			<td class="five-column"></td>
-			<td class="five-column">
+			<td class="five-column equal"></td>
+			<td class="five-column equal"></td>
+			<td class="five-column equal"></td>
+			<td class="five-column equal"></td>
+			<td class="five-column equal">
 				{{ Form::submit('Delete Image') }}
 			</td>
 			{{ Form::close() }}

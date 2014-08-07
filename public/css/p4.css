@@ -38,7 +38,9 @@ thead th {
 
     /*text-align: left;*/
 }
-
+tr{
+	width:800px;
+}
 tbody {
     height: 400px;
     overflow-y: auto;
@@ -61,5 +63,8 @@ tbody td, thead th {
 	width: 11%;
 }
 .five-column.fifth {
-	width: 11%;
+	width: 9%;
+}
+.five-column.equal {
+	width: 20%;
 }
