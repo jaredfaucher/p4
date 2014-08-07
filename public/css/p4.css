@@ -55,5 +55,11 @@ tbody td, thead th {
 	width: 33.3%;
 }
 .five-column {
-	width: 19%;
+	width: 26%;
+}
+.five-column.third {
+	width: 11%;
+}
+.five-column.fifth {
+	width: 11%;
 }

@@ -35,12 +35,12 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th class="five-column">Title</th>
-			<th class="five-column">URL</th>
-			<th class="five-column">Profile?</th>
-			<th class="five-column">Preview</th>
+			<th class="five-column first">Title</th>
+			<th class="five-column second">URL</th>
+			<th class="five-column third">Profile?</th>
+			<th class="five-column fourth">Preview</th>
 			@if(Auth::user() == $user)
-			<th class="five-column">Remove?</th>
+			<th class="five-column fifth">Remove?</th>
 			@endif
 		</tr>
 	</thead>
@@ -49,7 +49,7 @@
 		<tr>
 			<td class="filterable-cell five-column">{{ $image->title }}</td>
 			<td class="filterable-cell five-column">{{ $image->url }}</td>
-			<td class="filterable-cell five-column">
+			<td class="filterable-cell five-column third">
 				@if($image->profile == true)
 					Yes
 				@else
@@ -59,14 +59,13 @@
 			<td class="filterable-cell five-column"><img class="preview" src={{ $image->url }} /></td>
 			@if(Auth::user() == $user)
 			{{ Form::open(array('url' => '/myprofile/edit/delete', 'method' => 'POST')) }}
-			<td class="filterable-cell five-column">
+			<td class="filterable-cell five-column fifth">
 				{{ Form::radio('id', $image->id) }}
 			</td>
 			@endif
 		</tr>
 	@endforeach
 	</tbody>
-	@if(Auth::user() == $user)
 		<tr>
 			<td class="five-column"></td>
 			<td class="five-column"></td>
@@ -77,6 +76,5 @@
 			</td>
 			{{ Form::close() }}
 		</tr>
-	@endif
 </table>
 @stop
