@@ -10,18 +10,20 @@
 </div>
 <br>
 <div class="row text-center">
-	<div class="col-md-3">
+	<div class="col-md-2"></div>
+	<div class="col-md-2">
 		<a href='/'>Go Home</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/myprofile'>My Profile</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/myprofile/edit'>Edit Profile</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/logout'>Log out</a>
 	</div>
+	<div class="col-md-2"></div>
 </div>
 <br>
 {{ Form::open(array('url' => '/myprofile/edit/add', 'method' => 'POST', 'files' => true)) }}

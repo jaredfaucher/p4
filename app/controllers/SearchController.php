@@ -4,7 +4,7 @@ class SearchController extends BaseController {
 
 	public function getSearch()
 	{
-		# Genarate search form if user if logged in
+		# Genarate search form if user is logged in
         if (Auth::user())
         {
             return View::make('search_form');
@@ -22,23 +22,15 @@ class SearchController extends BaseController {
         $query = Input::get('query');
         $distanceAway = Input::get('distanceAway');
         $username = Input::get('username');
-        
+        # Redirect to search page if no input was entered
+        if (empty($query) && empty($distanceAway) && empty($username))
+        {
+            return Redirect::to('/search')
+                    ->with('flash_message', 'Please enter input!');  
+        }
         # Execute if $distanceAway and $username are empty
-        if (empty($distanceAway) && empty($username))
+        elseif (empty($distanceAway) && empty($username))
     	{
-        	# Validates that $query is not empty
-            /*$rules = array(
-                'query' => 'required');
-            $validator = Validator::make(array($query), $rules);
-            # Returns to search from if validator fails
-            if ($validator->fails())
-            {
-                return Redirect::to('/search')
-                    ->with('flash_message', 'Search failed, provide input and try again')
-                    ->withInput()
-                    ->withErrors($validator);
-            }*/
-
             # Adds wildcard to entered query and searches for parts with similar name           
             $query = '%'.$query.'%';
             # Gets type from input
@@ -78,20 +70,6 @@ class SearchController extends BaseController {
     	# Execute if $query and $username are empty
         elseif (empty($query) && empty($username))
     	{
-            # Validate that $distanceAway is not empty
-            /*$rules = array(
-                'distanceAway' => 'required');
-            $validator = Validator::make(array($distanceAway), $rules);
-
-            # Return user to search form if validator fails
-            if ($validator->fails())
-            {
-                return Redirect::to('/search')
-                    ->with('flash_message', 'Search failed, provide input and try again')
-                    ->withInput()
-                    ->withErrors($validator);
-            }*/
-
             include 'search_helper.php';
 
             # Calculate logged in user's lat/long coordinates
@@ -144,19 +122,6 @@ class SearchController extends BaseController {
         # Execute if $distanceAway and $query are empty
         else
         {
-            # Validates that username was entered
-            /*$rules = array(
-                'username' => 'required');
-            $validator = Validator::make(array($username), $rules);
-
-            # Returns to search form if validator fails
-            if ($validator->fails())
-            {
-                return Redirect::to('/search')
-                    ->with('flash_message', 'Search failed, please provide input and try again')
-                    ->withInput()
-                    ->withErrors($validator);
-            }*/
             # Adds wildcard to entered username and searches for user with similar name           
             $username = '%'.$username.'%';
             $users = User::where('username', 'LIKE', '%'.$username.'%')

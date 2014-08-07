@@ -9,15 +9,17 @@
 	<h1 class="title">Bike Swap :: Search</h1>
 </div>
 <div class="row text-center">
-	<div class="col-md-4">
+	<div class="col-md-3"></div>
+	<div class="col-md-2">
 		<a href='/'>Go Home</a>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-2">
 		<a href='/myprofile'>My Profile</a>
 	</div>
-   	<div class="col-md-4">
+   	<div class="col-md-2">
    		<a href='/logout'>Log out</a>
    	</div>
+   	<div class="col-md-3"></div>
 </div>
 {{ Form::open(array('url' => '/search', 'method' => 'POST')) }}
 <div class="row text-center">

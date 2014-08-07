@@ -15,7 +15,8 @@ class RegisterController extends BaseController {
                 'username' => 'required|unique:users,username',
                 'email' => 'required|email|unique:users,email',
                 'zip' => 'required|digits:5',
-                'password' => 'required|min:6'
+                'password' => 'required|min:6',
+                'confirm' => 'required|min:6'
             );
         
         $validator = Validator::make(Input::all(), $rules);
@@ -26,6 +27,12 @@ class RegisterController extends BaseController {
                 ->with('flash_message', 'Registration failed, please fix errors and try again')
                 ->withInput()
                 ->withErrors($validator);
+        }
+        if (Input::get('password') != Input::get('confirm'))
+        {
+            return Redirect::to('/register')
+                ->with('flash_message', 'Password and confirmation do not match. Try again')
+                ->withInput(); 
         }
 
         # Creates new user and fills in input

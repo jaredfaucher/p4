@@ -4,11 +4,13 @@ class ImageController extends BaseController
 {
 	public function getAddImage()
     {
+        # Generate add image form if user is logged in
         if (Auth::user())
         {
             return View::make('add_image')
                 ->with('user', Auth::user());
         }
+        # Prompt user to log in if not logged in
         else
         {
             return Redirect::to('/login')
@@ -18,9 +20,11 @@ class ImageController extends BaseController
 
     public function postAddImage()
     {
-      	include 'image_helper.php';
+      	# Include image_helpher.php to upload to Imgur
+        include 'image_helper.php';
 
-       	$rules = array(
+       	# Validate input
+        $rules = array(
                 'file' => 'required|image',
                 'title' => 'required',
                 'description' => 'required'
@@ -28,6 +32,7 @@ class ImageController extends BaseController
 
        	$validator = Validator::make(Input::all(), $rules);
 
+        # Returns to add image form if validator fails
        	if ($validator->fails())
         {
             return Redirect::to('/myprofile/edit/add')
@@ -89,15 +94,17 @@ class ImageController extends BaseController
             catch(Exception $e) {
                 return Redirect::to('/myprofile/edit')->with('flash_message', 'Image not uploaded, please try again');
             }
+            # delete image from tmp folder, catching errors
             try {
             	File::delete($destinationPath.$filename);
             }
             catch(Exception $e) {
             	return Redirect::to('/myprofile/edit')->with('flash_message', 'Temporary Image not deleted. Contact Admin.');
             }
-            
+            # Return user to profile with flash message
             return Redirect::to('/myprofile')->with('flash_message', 'Your new image was added!');
         }
+        # If file cannot be moved into tmp folder, return to edit page with errors
         else
         {
             return Redirect::to('/myprofile/edit')->with('flash_message', 'Image not uploaded, please try again');
@@ -105,6 +112,7 @@ class ImageController extends BaseController
     }
 	public function getDeleteImage()
     {
+        # Generate delete form if user is logged in
         if (Auth::user())
         {
             $images = Image::where('user_id', '=', Auth::user()->id)->get();
@@ -112,6 +120,7 @@ class ImageController extends BaseController
             	->with('images', $images)
                 ->with('user', Auth::user());
         }
+        # Prompt user to log in if not logged in
         else
         {
             return Redirect::to('/login')
@@ -121,7 +130,8 @@ class ImageController extends BaseController
 
     public function postDeleteImage()
     {
-    	$id = Input::get('id');
+    	# Get image's id from delete form and find image in database
+        $id = Input::get('id');
     	$image = Image::find($id);
 
     	# delete from database
@@ -135,6 +145,7 @@ class ImageController extends BaseController
         		->with('user', Auth::user()->username)
         		->withInput();
     	}
+        # Redirect to profile if image was successfully deleted
     	return Redirect::to('/myprofile')
     		->with('flash_message', 'Your image was succesfully deleted');
     }

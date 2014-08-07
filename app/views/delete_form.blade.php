@@ -10,18 +10,20 @@
 </div>
 <br>
 <div class="row text-center">
-	<div class="col-md-3">
+	<div class="col-md-2"></div>
+	<div class="col-md-2">
 		<a href='/'>Go Home</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/myprofile'>My Profile</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/myprofile/edit'>Edit Profile</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/logout'>Log out</a>
 	</div>
+	<div class="col-md-2"></div>
 </div>
 
 @foreach($errors->all() as $message) 
@@ -42,8 +44,8 @@
 			@endif
 		</tr>
 	</thead>
-	@foreach ($images as $image)
 	<tbody>
+	@foreach ($images as $image)
 		<tr>
 			<td class="filterable-cell five-column">{{ $image->title }}</td>
 			<td class="filterable-cell five-column">{{ $image->url }}</td>
@@ -63,6 +65,7 @@
 			@endif
 		</tr>
 	@endforeach
+	</tbody>
 	@if(Auth::user() == $user)
 		<tr>
 			<td class="five-column"></td>
@@ -75,6 +78,5 @@
 			{{ Form::close() }}
 		</tr>
 	@endif
-	</tbody>
 </table>
 @stop

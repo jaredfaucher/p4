@@ -10,18 +10,20 @@
 </div>
 <br>
 <div class="row text-center">
-	<div class="col-md-3">
+	<div class="col-md-2"></div>
+	<div class="col-md-2">
 		<a href='/'>Go Home</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/myprofile'>My Profile</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/search'>Search Users or Parts</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/logout'>Log out</a>
 	</div>
+	<div class="col-md-2"></div>
 </div>
 <br>
 @foreach($errors->all() as $message) 

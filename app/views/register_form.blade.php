@@ -45,6 +45,12 @@
 			<div class="col-md-3">{{ Form::password('password') }}</div>
 			<div class="col-md-3"></div>
 		</div>
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-3">Confirm: </div>
+			<div class="col-md-3">{{ Form::password('confirm') }}</div>
+			<div class="col-md-3"></div>
+		</div>
 		<br>
 		<div class="row text-center">
 			<div class="col-md-4"></div>

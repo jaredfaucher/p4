@@ -58,6 +58,5 @@ Route::post('/password/reset', array('before' => 'csrf',
 
 Route::get('/password/reset/{token}', 'RemindersController@getReset');
 
-Route::post('/password/reset/{token}', array(
-										'uses' => 'RemindersController@postReset',
+Route::post('/password/reset/{token}', array('uses' => 'RemindersController@postReset',
 										'as' => 'password.update'));

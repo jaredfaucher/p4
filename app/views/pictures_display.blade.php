@@ -10,7 +10,12 @@
 </div>
 <br>
 <div class='row text-center'>
-	<div class="col-md-3">
+	@if(Auth::user() != $user)
+	<div class="col-md-1"></div>
+	@else
+	<div class="col-md-2"></div>
+	@endif
+	<div class="col-md-2">
 		<a href='/'>Go Home</a>
 	</div>
 	<div class="col-md-2">
@@ -22,9 +27,14 @@
    	<div class="col-md-2">
    		<a href='/logout'>Log out</a>
    	</div>
-	<div class="col-md-3">
+   	@if(Auth::user() != $user)
+	<div class="col-md-2">
 		<a href={{ '"/profile/'.$user->username.'"' }}>Back to Profile</a>
 	</div>
+	<div class="col-md-1"></div>
+	@else
+	<div class="col-md-2"></div>
+	@endif
 </div>
 <div class="row text-center">
 	<h3>{{ $user->username }}'s Pictures</h3>

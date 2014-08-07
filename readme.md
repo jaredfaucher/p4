@@ -27,7 +27,7 @@
 			User as the ability to search for parts by their name/description and is able to filter their search by part type.
 			<p>User has the ability to look for all users within a 5, 10, 25 and 50 mile radius.  The user can also seach for a user by their username.
 
-	The files "image_helper.php" and "search_helper.php" located in app/controllers/helpers are used to reduce repetition within the controllers.  The file "image_helper.php" is used to connect to the Imgur API before attempting to upload the file.  The "seach_helper.php" contains two functions needed to distance between two Zip Codes. The first function "getCoordinates" taps into Google Geocoding API, getting a JSON file and parses the file to obtain the lat/long coordinates for the two Zip Codes. The second function "calculateDistance" is adapted from the link below and calculates the distance in miles between two lat/long coordinates obtained in the previous function.
+	The files "image_helper.php" and "search_helper.php" located in app/controllers are used to reduce repetition within the controllers.  The file "image_helper.php" is used to connect to the Imgur API before attempting to upload the file.  The "seach_helper.php" contains two functions needed to distance between two Zip Codes. The first function "getCoordinates" taps into Google Geocoding API, getting a JSON file and parses the file to obtain the lat/long coordinates for the two Zip Codes. The second function "calculateDistance" is adapted from the link below and calculates the distance in miles between two lat/long coordinates obtained in the previous function.
 
 ## Plugins/Libraries/Etc:
 	-Bootstrap:  Used for boiler plate stylization.

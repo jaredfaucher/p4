@@ -4,10 +4,12 @@ class PartsController extends BaseController {
 
 	public function getAdd()
 	{
-		if (Auth::user())
+		# Generate add form if user is logged in
+        if (Auth::user())
         {
             return View::make('add_form');
         }
+        # Prompt user to log in if not logged in
         else
         {
             return Redirect::to('/login')
@@ -17,14 +19,16 @@ class PartsController extends BaseController {
 
 	public function postAdd()
 	{
-		$rules = array(
+		# Set validator rules and attempt to validate input
+        $rules = array(
                 'type' => 'required',
                 'part_name' => 'required'
             );
 
 		$validator = Validator::make(Input::all(), $rules);
 
-		if ($validator->fails())
+		# Return to add form upon failure
+        if ($validator->fails())
         {
             return Redirect::to('/add')
                 ->with('flash_message', 'Add failed, please fix errors and try again')
@@ -32,6 +36,7 @@ class PartsController extends BaseController {
                 ->withErrors($validator);
         }
 
+        # Create new part object and assign input data
 		$part = new Part;
 		$part->type = Input::get('type');
 		$part->part_name = Input::get('part_name');
@@ -47,17 +52,19 @@ class PartsController extends BaseController {
         		->with('flash_message', 'Add failed, please try again.')
         		->withInput();
     	}
-
+        # Redirect to user's profile
 		return Redirect::to('/myprofile')
+            ->with('flash_message', 'Part successfully added!')
 			->with('user', Auth::user()->username);
 	}
 
 	public function postDelete()
 	{
-		# DELETE THE PART
+		# Get part id from form input and find the part in database
 		$id = Input::get('id');
 		$part = Part::find($id);
-		try {
+		# Try to delete the part
+        try {
         	$part->delete();
     	}
     	# Fail
@@ -67,8 +74,9 @@ class PartsController extends BaseController {
         		->with('user', Auth::user()->username)
         		->withInput();
     	}
-
+        # Redirect to user's profile
 		return Redirect::to('/myprofile')
+            ->with('flash_message', 'Part successfully deleted!')
 			->with('user', Auth::user()->username);
 	}
 

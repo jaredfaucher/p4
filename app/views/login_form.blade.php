@@ -8,14 +8,14 @@
 	<h1 class="title">Bike Swap :: Login</h1>
 	<br>
 	<div class='row text-center'>
-		<div class="col-md-3"></div>
-		<div class="col-md-3">
+		<div class="col-md-4"></div>
+		<div class="col-md-2">
 			<a href='/'>Go Home</a>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<a href='/register'>Register</a>
 		</div>
-		<div class="col-md-3"></div>
+		<div class="col-md-4"></div>
 	</div>
 	<br>
     @if(Session::get('error'))

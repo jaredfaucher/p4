@@ -25,7 +25,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-3"></div>
-			<div class="col-md-3">New Password: </div>
+			<div class="col-md-3">New Password: <small>(Min. 6)</small></div>
 			<div class="col-md-3">{{ Form::password('password') }}</div>
 			<div class="col-md-3"></div>
 		</div>

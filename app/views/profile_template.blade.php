@@ -10,26 +10,33 @@
 </div>
 <br>
 <div class='row text-center'>
-	<div class="col-md-3">
+	<div class="col-md-1"></div>
+	<div class="col-md-2">
 		<a href='/'>Go Home</a>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/search'>Search Users or Parts</a>
 	</div>
 @if(Auth::user() == $user)
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/myprofile/edit'>Edit Profile</a>
 	</div>
+	<div class="col-md-2">
+		<a href={{ '"/profile/'.$user->username.'/pictures"' }}>
+			My Pictures
+		</a>
+	</div>
 @else
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href={{ '"/profile/'.$user->username.'/pictures"' }}>
 			{{$user->username}}'s Pictures
 		</a>
 	</div>
 @endif
-	<div class="col-md-3">
+	<div class="col-md-2">
 		<a href='/logout'>Log out</a>
 	</div>
+	<div class="col-md-1"></div>
 </div>
 <div class='row text-center'>
 	<img id='profile_pic' alt='Bike Swap' src={{ $url }} />

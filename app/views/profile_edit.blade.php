@@ -9,18 +9,20 @@
 	<h1 class="title">Bike Swap :: Edit {{ $user->username }}'s Profile</h1>
 </div>
 	<div class='row text-center'>
-		<div class="col-md-3">
+		<div class="col-md-2"></div>
+		<div class="col-md-2">
 			<a href='/'>Go Home</a>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<a href='/myprofile'>My Profile</a>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<a href='/myprofile/edit/add'>Add Picture to profile</a>
 		</div>
-		<div class="col-md-3">
+		<div class="col-md-2">
 			<a href='/myprofile/edit/delete'>Delete Picture from profile</a>
 		</div>
+		<div class="col-md-2"></div>
 	</div>
 	{{ Form::open(array('url' => '/myprofile/edit', 'method' => 'POST')) }}
 		<div class="row text-center"><h3>Change Password</h3></div>
