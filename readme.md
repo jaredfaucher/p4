@@ -10,10 +10,10 @@ My project, Bike Swap, is a web application that helps cycling enthusiasts conne
 
 User must register with a username, email, Zip Code and password before having access to the site.  Feel free to sign up yourself but I have seeded the database and provided the following login information:
 
-+Username: JaredFaucher
-+Email: jared.faucher@gmail.com (my email)
-+Zip Code: 02145
-+Password: password
++Username: JaredFaucher  
++Email: jared.faucher@gmail.com (my email)  
++Zip Code: 02145  
++Password: password  
 
 There are also additional login/part/image information in the app/database/seeds folder but the other users I created have fake email addresses.
 
