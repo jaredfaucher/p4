@@ -44,7 +44,7 @@ class ImageController extends BaseController
         $file = Input::file('file');
         if (App::environment('production'))
         {
-            $destinationPath = '/tmp';
+            $destinationPath = $OPENSHIFT_DATA_DIR;
         }
         else
         {
