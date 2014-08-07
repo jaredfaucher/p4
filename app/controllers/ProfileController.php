@@ -129,7 +129,7 @@ class ProfileController extends BaseController {
             }
             
             # SEND CONFIRMATION EMAIL
-            Mail::send('change.register', array('username' => $user->username, 'change' => $change), function($message) use ($user)
+            Mail::send('emails.change', array('username' => $user->username, 'change' => $change), function($message) use ($user)
             {
                 $message->to($user->email, $user->username)
                     ->subject('Your Account has been changed');
