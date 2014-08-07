@@ -121,8 +121,6 @@ class ImageController extends BaseController
 
     public function postDeleteImage()
     {
-        require 'helpers\image_helper.php';
-
     	$id = Input::get('id');
     	$image = Image::find($id);
 
