@@ -48,7 +48,7 @@ class ImageController extends BaseController
         }
         else
         {
-            $destinationPath = storage_path();."\\tmp\\";
+            $destinationPath = storage_path()."\\tmp\\";
         }
         $filename = $file->getClientOriginalName();
 
