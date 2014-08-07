@@ -92,7 +92,5 @@
 			@endforeach
 			</tbody>
 		</table>	
-	@elseif(empty($users))
-		<h3>There are no users matching that criteria.  Try again!</h3>
 	@endif
 @stop

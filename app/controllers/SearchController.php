@@ -55,11 +55,7 @@ class SearchController extends BaseController {
                     ->where('type', '=', $type)
                     ->get();
             }
-            if (!isset($parts))
-            {
-                return Redirect::to('/search')
-                    ->with('flash_message', 'No parts matching that name found. Try again!');
-            }
+            $usernames = null;
             # Finds corresponding users for parts found
             foreach ($parts as $part)
             {
@@ -125,7 +121,7 @@ class SearchController extends BaseController {
                 include app_path().'\controllers\helpers\search_helper.php';
             }*/
 
-            include app_path().'\controllers\helpers\search_helper.php';
+            include 'search_helper.php';
 
             # Calculate logged in user's lat/long coordinates
             $coordinates1 = getCoordinates(Auth::user()->zip);

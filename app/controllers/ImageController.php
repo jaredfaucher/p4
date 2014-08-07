@@ -54,8 +54,8 @@ class ImageController extends BaseController
             include app_path().'\controllers\helpers\image_helper.php';
         }*/
        	
-        include app_path().'\controllers\helpers\image_helper.php';
-        
+        include 'image_helper.php';
+
        	$rules = array(
                 'file' => 'required|image',
                 'title' => 'required',
