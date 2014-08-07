@@ -4,10 +4,10 @@ class LogoutController extends BaseController {
 
 	public function getLogout()
 	{
-		# Log out
+		# Logs out user
     	Auth::logout();
 
-    	# Send them to the homepage
+    	# Redirects to the homepage
     	return Redirect::to('/');
 	}
 

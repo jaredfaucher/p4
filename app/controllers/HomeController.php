@@ -17,6 +17,7 @@ class HomeController extends BaseController {
 
 	public function getIndex()
 	{
+		# Generates index page
 		return View::make('index');
 	}
 

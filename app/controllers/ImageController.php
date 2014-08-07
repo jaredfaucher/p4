@@ -18,8 +18,8 @@ class ImageController extends BaseController
 
     public function postAddImage()
     {
-        require 'helpers\image_helper.php';
-       	
+      	include 'image_helper.php';
+
        	$rules = array(
                 'file' => 'required|image',
                 'title' => 'required',
@@ -121,13 +121,8 @@ class ImageController extends BaseController
 
     public function postDeleteImage()
     {
-        require 'helpers\image_helper.php';
-
     	$id = Input::get('id');
     	$image = Image::find($id);
-    	
-    	# delete from imgur
-    	# TODO:$basic = $client->api('image')->deleteImage($image->imgurId);
 
     	# delete from database
     	try {

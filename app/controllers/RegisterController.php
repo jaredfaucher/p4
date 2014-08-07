@@ -4,12 +4,14 @@ class RegisterController extends BaseController {
 
 	public function getRegister()
 	{
-		return View::make('register_form');
+		# Generate register form
+        return View::make('register_form');
 	}
 
 	public function postRegister()
 	{
-	    $rules = array(
+	    # Validates user input
+        $rules = array(
                 'username' => 'required|unique:users,username',
                 'email' => 'required|email|unique:users,email',
                 'zip' => 'required|digits:5',
@@ -17,7 +19,7 @@ class RegisterController extends BaseController {
             );
         
         $validator = Validator::make(Input::all(), $rules);
-        
+        # Returns to register form if validator fails
         if ($validator->fails())
         {
             return Redirect::to('/register')
@@ -26,6 +28,7 @@ class RegisterController extends BaseController {
                 ->withErrors($validator);
         }
 
+        # Creates new user and fills in input
         $user = new User;
         $user->username = Input::get('username');
         $user->email = Input::get('email');
@@ -51,6 +54,7 @@ class RegisterController extends BaseController {
                     ->subject('Welcome to Bike Swap!');
         });
         
+        # Generates register confirm page
 		return View::make('register_confirm');
 	}
 }
