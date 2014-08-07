@@ -18,43 +18,7 @@ class ImageController extends BaseController
 
     public function postAddImage()
     {
-        # Image Controller Helper
-
-        # set up imgur connection
-        /*$client = new \Imgur\Client();
-        $client->setOption('client_id', 'd6c1ad7da60dc22');
-        $client->setOption('client_secret', 'f3d89c626d4a3ce5a41e23351400e942d79542a6');
-
-        if (isset($_SESSION['token'])) 
-        {
-            $client->setAccessToken($_SESSION['token']);
-            if($client->checkAccessTokenExpired()) 
-            {
-                $client->refreshToken();
-            }
-        }
-        elseif (isset($_GET['code'])) 
-        {
-                $client->requestAccessToken($_GET['code']);
-                $_SESSION['token'] = $client->getAccessToken();
-        }
-        else 
-        {
-            echo '<a href="'.$client->getAuthenticationUrl().'">Click to authorize</a>';
-        }*/
-        
-        # Unsuccessful attempt to fix helpers problem
-        /*if (App::environment() == 'production')
-        {
-            set_include_path(get_include_path() . PATH_SEPARATOR . $_ENV['OPENSHIFT_REPO_DIR']);
-            include 'app\controllers\helpers\image_helper.php'; 
-        }
-        else
-        {
-            include app_path().'\controllers\helpers\image_helper.php';
-        }*/
-       	
-        include 'image_helper.php';
+      	include 'image_helper.php';
 
        	$rules = array(
                 'file' => 'required|image',
@@ -161,9 +125,6 @@ class ImageController extends BaseController
 
     	$id = Input::get('id');
     	$image = Image::find($id);
-    	
-    	# delete from imgur
-    	# TODO:$basic = $client->api('image')->deleteImage($image->imgurId);
 
     	# delete from database
     	try {

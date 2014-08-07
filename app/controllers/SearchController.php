@@ -38,6 +38,7 @@ class SearchController extends BaseController {
                     ->withInput()
                     ->withErrors($validator);
             }*/
+            
             # Adds wildcard to entered query and searches for parts with similar name           
             $query = '%'.$query.'%';
             # Gets type from input
@@ -54,6 +55,11 @@ class SearchController extends BaseController {
                 $parts = Part::where('part_name', 'LIKE', '%'.$query.'%')
                     ->where('type', '=', $type)
                     ->get();
+            }
+            if ($parts->isEmpty())
+            {
+                return Redirect::to('/search')
+                    ->with('flash_message', 'No parts found matching that name. Try again!');
             }
             $usernames = null;
             # Finds corresponding users for parts found
@@ -84,41 +90,6 @@ class SearchController extends BaseController {
                     ->with('flash_message', 'Search failed, provide input and try again')
                     ->withInput()
                     ->withErrors($validator);
-            }*/
-
-
-            # Search Helper Functions
-
-            # Uses Google Geocode API to get lat/long coordinates from Zip Code
-            /*function getCoordinates($zip)
-            {
-                $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
-                $json = file_get_contents($url);
-                $obj = json_decode($json);
-                $coordinates['lat'] = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
-                $coordinates['long'] = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
-                return $coordinates;
-            }
-            # Calculates distance between two lat/long points
-            function calculateDistance($latitude1, $longitude1, $latitude2, $longitude2) 
-            {
-                $theta = $longitude1 - $longitude2;
-                $miles = (sin(deg2rad($latitude1)) * sin(deg2rad($latitude2))) + (cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * cos(deg2rad($theta)));
-                $miles = acos($miles);
-                $miles = rad2deg($miles);
-                $miles = $miles * 60 * 1.1515;
-                return $miles; 
-            }*/
-            
-            # Unsuccessful attempt to fix helpers problem
-            /*if (App::environment() == 'production')
-            {
-                set_include_path(get_include_path() . PATH_SEPARATOR . $_ENV['OPENSHIFT_REPO_DIR']);
-                include 'app\controllers\helpers\search_helper.php';
-            }
-            else
-            {
-                include app_path().'\controllers\helpers\search_helper.php';
             }*/
 
             include 'search_helper.php';
@@ -164,8 +135,9 @@ class SearchController extends BaseController {
             # Returns search results view with $distanceAway to tell user there is no one within the chosen radius
         	else
         	{
-        		return View::make('search_results')
-                    ->with('distanceAway', $distanceAway);
+        		return Redirect::to('/search')
+                    ->with('flash_message', 'No users found in that radius. Try again!');
+
         	}
     	}
 
@@ -189,8 +161,16 @@ class SearchController extends BaseController {
             $username = '%'.$username.'%';
             $users = User::where('username', 'LIKE', '%'.$username.'%')->get();
             # Returns search results view with $users
-            return View::make('search_results')
-                ->with('users', $users);
+            if ($users->isEmpty())
+            {
+                return Redirect::to('/search')
+                    ->with('flash_message', 'No users found matching that name. Try again!');
+            }
+            else
+            {
+                return View::make('search_results')
+                    ->with('users', $users);
+            }
         }
 	}
 }
