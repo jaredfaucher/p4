@@ -1,14 +1,15 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 class SearchController extends BaseController {
 
 	public function getSearch()
 	{
-		if (Auth::user())
+		# Genarate search form if user if logged in
+        if (Auth::user())
         {
             return View::make('search_form');
         }
+        # Prompt user to log in if not logged in
         else
         {
             return Redirect::to('/login')
@@ -17,63 +18,83 @@ class SearchController extends BaseController {
 	}
 	public function postSearch()
 	{
-    	$query = Input::get('query');
+    	# Get input to determine which form was submitted
+        $query = Input::get('query');
         $distanceAway = Input::get('distanceAway');
         $username = Input::get('username');
+        
+        # Execute if $distanceAway and $username are empty
         if (empty($distanceAway) && empty($username))
     	{
-        	$rules = array(
+        	# Validates that $query is not empty
+            /*$rules = array(
                 'query' => 'required');
             $validator = Validator::make(array($query), $rules);
-
+            # Returns to search from if validator fails
             if ($validator->fails())
             {
                 return Redirect::to('/search')
                     ->with('flash_message', 'Search failed, provide input and try again')
                     ->withInput()
                     ->withErrors($validator);
-            }
-
+            }*/
+            # Adds wildcard to entered query and searches for parts with similar name           
             $query = '%'.$query.'%';
+            # Gets type from input
             $type = Input::get('type');
-        	if ($type == 'any')
+        	# Searches for part with similar name.  
+            # Searches all types if type was 'any'
+            if ($type == 'any')
             {
                 $parts = Part::where('part_name', 'LIKE', '%'.$query.'%')->get();
             }
+            # Filters search results if type was specified
             else
             {
                 $parts = Part::where('part_name', 'LIKE', '%'.$query.'%')
                     ->where('type', '=', $type)
                     ->get();
             }
+            if (!isset($parts))
+            {
+                return Redirect::to('/search')
+                    ->with('flash_message', 'No parts matching that name found. Try again!');
+            }
+            # Finds corresponding users for parts found
             foreach ($parts as $part)
             {
                 $user = User::where('id', '=', $part->user_id)->first();
 
                 $usernames[$part->id] = $user->username;
         	}
+            # Returns search results with $parts and corresponding $usernames
             return View::make('search_results')
                 ->with('parts', $parts)
                 ->with('usernames', $usernames);
 
     	}
-    	elseif (empty($query) && empty($username))
+    	# Execute if $query and $username are empty
+        elseif (empty($query) && empty($username))
     	{
-            $rules = array(
+            # Validate that $distanceAway is not empty
+            /*$rules = array(
                 'distanceAway' => 'required');
             $validator = Validator::make(array($distanceAway), $rules);
 
+            # Return user to search form if validator fails
             if ($validator->fails())
             {
                 return Redirect::to('/search')
                     ->with('flash_message', 'Search failed, provide input and try again')
                     ->withInput()
                     ->withErrors($validator);
-            }
+            }*/
 
 
             # Search Helper Functions
-            function getCoordinates($zip)
+
+            # Uses Google Geocode API to get lat/long coordinates from Zip Code
+            /*function getCoordinates($zip)
             {
                 $url = 'http://maps.googleapis.com/maps/api/geocode/json?address='.$zip.'&sensor=false';
                 $json = file_get_contents($url);
@@ -82,6 +103,7 @@ class SearchController extends BaseController {
                 $coordinates['long'] = $obj->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
                 return $coordinates;
             }
+            # Calculates distance between two lat/long points
             function calculateDistance($latitude1, $longitude1, $latitude2, $longitude2) 
             {
                 $theta = $longitude1 - $longitude2;
@@ -90,7 +112,7 @@ class SearchController extends BaseController {
                 $miles = rad2deg($miles);
                 $miles = $miles * 60 * 1.1515;
                 return $miles; 
-            }
+            }*/
             
             # Unsuccessful attempt to fix helpers problem
             /*if (App::environment() == 'production')
@@ -103,13 +125,21 @@ class SearchController extends BaseController {
                 include app_path().'\controllers\helpers\search_helper.php';
             }*/
 
+            include app_path().'\controllers\helpers\search_helper.php';
+
+            # Calculate logged in user's lat/long coordinates
             $coordinates1 = getCoordinates(Auth::user()->zip);
-        	$users = User::all();
-        	$i = 0;
-        
+        	
+            # Retrieves all users to calculate distance
+            $users = User::all();
+        	# Flag variable for $closeUsers array
+            $i = 0;
+            
+            # Loops through all users in $users and calculates distance from logged in user
         	foreach ($users as $user)
         	{
-            	if ($user->id == Auth::user()->id)
+            	# Skips logged in user
+                if ($user->id == Auth::user()->id)
             	{
                     continue;
             	}
@@ -120,6 +150,8 @@ class SearchController extends BaseController {
                                                          $coordinates1['long'], 
                                                          $coordinates2['lat'],
                                                          $coordinates2['long']);
+                    # Adds user to $closerUsers array if they are close enough
+                    # Increments $i
                     if ($distanceBetween <= $distanceAway)
                 	{
                         $closeUsers[$i] = $user;
@@ -127,32 +159,40 @@ class SearchController extends BaseController {
                 	}
             	}
         	}
+            # Returns Search Results view if $closerUsers contains users
         	if (!empty($closeUsers))
         	{
             	return View::make('search_results')
                     ->with('closeUsers', $closeUsers);
         	}
+            # Returns search results view with $distanceAway to tell user there is no one within the chosen radius
         	else
         	{
         		return View::make('search_results')
                     ->with('distanceAway', $distanceAway);
         	}
     	}
+
+        # Execute if $distanceAway and $query are empty
         else
         {
-            $rules = array(
+            # Validates that username was entered
+            /*$rules = array(
                 'username' => 'required');
             $validator = Validator::make(array($username), $rules);
 
+            # Returns to search form if validator fails
             if ($validator->fails())
             {
                 return Redirect::to('/search')
                     ->with('flash_message', 'Search failed, please provide input and try again')
                     ->withInput()
                     ->withErrors($validator);
-            }            
+            }*/
+            # Adds wildcard to entered username and searches for user with similar name           
             $username = '%'.$username.'%';
             $users = User::where('username', 'LIKE', '%'.$username.'%')->get();
+            # Returns search results view with $users
             return View::make('search_results')
                 ->with('users', $users);
         }

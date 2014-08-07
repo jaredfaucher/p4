@@ -1,6 +1,5 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+
 Route::get('/', 'HomeController@getIndex');
 
 Route::get('/register', 'RegisterController@getRegister');
@@ -19,15 +18,18 @@ Route::get('/myprofile', 'ProfileController@getMyProfile');
 
 Route::get('/myprofile/edit', 'ProfileController@getEdit');
 
-Route::post('/myprofile/edit', 'ProfileController@postEdit');
+Route::post('/myprofile/edit', array('before' => 'csrf', 
+                          'uses' => 'ProfileController@postEdit'));
 
 Route::get('/myprofile/edit/add', 'ImageController@getAddImage');
 
-Route::post('/myprofile/edit/add', 'ImageController@postAddImage');
+Route::post('/myprofile/edit/add', array('before' => 'csrf', 
+                          'uses' => 'ImageController@postAddImage'));
 
 Route::get('/myprofile/edit/delete', 'ImageController@getDeleteImage');
 
-Route::post('/myprofile/edit/delete', 'ImageController@postDeleteImage');
+Route::post('/myprofile/edit/delete', array('before' => 'csrf', 
+                          'uses' => 'ImageController@postDeleteImage'));
 
 Route::get('/profile/{username}', 'ProfileController@getProfile');
 
@@ -43,13 +45,16 @@ Route::post('/delete', array('before' => 'csrf',
 
 Route::get('/search', 'SearchController@getSearch');
 
-Route::post('/search', 'SearchController@postSearch');
+Route::post('/search', array('before' => 'csrf', 
+                          'uses' => 'SearchController@postSearch'));
 
-Route::post('/request', 'ProfileController@postRequest');
+Route::post('/request', array('before' => 'csrf', 
+                          'uses' => 'ProfileController@postRequest'));
 
 Route::get('/password/reset', 'RemindersController@getRemind');
 
-Route::post('/password/reset', 'RemindersController@postRemind');
+Route::post('/password/reset', array('before' => 'csrf', 
+                          'uses' => 'RemindersController@postRemind'));
 
 Route::get('/password/reset/{token}', 'RemindersController@getReset');
 

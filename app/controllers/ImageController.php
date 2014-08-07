@@ -21,7 +21,7 @@ class ImageController extends BaseController
         # Image Controller Helper
 
         # set up imgur connection
-        $client = new \Imgur\Client();
+        /*$client = new \Imgur\Client();
         $client->setOption('client_id', 'd6c1ad7da60dc22');
         $client->setOption('client_secret', 'f3d89c626d4a3ce5a41e23351400e942d79542a6');
 
@@ -41,7 +41,7 @@ class ImageController extends BaseController
         else 
         {
             echo '<a href="'.$client->getAuthenticationUrl().'">Click to authorize</a>';
-        }
+        }*/
         
         # Unsuccessful attempt to fix helpers problem
         /*if (App::environment() == 'production')
@@ -54,6 +54,8 @@ class ImageController extends BaseController
             include app_path().'\controllers\helpers\image_helper.php';
         }*/
        	
+        include app_path().'\controllers\helpers\image_helper.php';
+        
        	$rules = array(
                 'file' => 'required|image',
                 'title' => 'required',

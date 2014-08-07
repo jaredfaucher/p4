@@ -4,24 +4,30 @@ class ProfileController extends BaseController {
 
 	public function getMyProfile()
 	{
-		if (Auth::user())
+		# Checks if user is logged in
+        if (Auth::user())
         {
+            # retrieves user's parts and profile image
             $parts = Part::where('user_id', '=', Auth::user()->id)->get();
             $image = Image::where('user_id', '=', Auth::user()->id)
                         ->where('profile', '=', true)->first();
+            # Assigns profile picture url to $url if it exists.
             if (!empty($image))
             {
                 $url = $image->url;
             }
+            # Assigns blank URL if it does not
             else
             {
                 $url = '';
             }
+            # Generates profile template with parts, profile picture url and user info
             return View::make('profile_template')
                 ->with('parts', $parts)
                 ->with('url', $url)
                 ->with('user', Auth::user());
         }
+        # Redirects to login form if user is not logged in
         else
         {
             return Redirect::to('/login')
@@ -31,11 +37,14 @@ class ProfileController extends BaseController {
 
 	public function getEdit()
 	{
+        # Checks if user is logged in
         if (Auth::user())
         {
+            # Generates profile edit view
             return View::make('profile_edit')
                 ->with('user', Auth::user());
         }
+        # Redirects to login form if user is not logged in
         else
         {
             return Redirect::to('/login')
