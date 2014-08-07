@@ -38,7 +38,7 @@ class SearchController extends BaseController {
                     ->withInput()
                     ->withErrors($validator);
             }*/
-            
+
             # Adds wildcard to entered query and searches for parts with similar name           
             $query = '%'.$query.'%';
             # Gets type from input
@@ -159,7 +159,9 @@ class SearchController extends BaseController {
             }*/
             # Adds wildcard to entered username and searches for user with similar name           
             $username = '%'.$username.'%';
-            $users = User::where('username', 'LIKE', '%'.$username.'%')->get();
+            $users = User::where('username', 'LIKE', '%'.$username.'%')
+                        ->where('id', '<>', Auth::user()->id)
+                        ->get();
             # Returns search results view with $users
             if ($users->isEmpty())
             {
