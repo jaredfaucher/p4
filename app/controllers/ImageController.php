@@ -44,7 +44,9 @@ class ImageController extends BaseController
         
         # get file from upload and put in tmp folder
         $file = Input::file('file');
+        echo "ERROR BEFORE STORAGE";
         $destinationPath = storage_path()."\\tmp\\";
+        echo "ERROR AFTER STORAGE";
         $filename = $file->getClientOriginalName();
         
         if ($file->move($destinationPath, $filename))
