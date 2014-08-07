@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+error_reporting(-1);
 ini_set('display_errors', 1);
 class ImageController extends BaseController 
 {
@@ -44,11 +44,9 @@ class ImageController extends BaseController
         
         # get file from upload and put in tmp folder
         $file = Input::file('file');
-        echo "ERROR BEFORE STORAGE";
         $destinationPath = storage_path()."\\tmp\\";
-        echo "ERROR AFTER STORAGE";
         $filename = $file->getClientOriginalName();
-        
+        echo "ERROR AFTER LINE 49";
         if ($file->move($destinationPath, $filename))
         {
             # fill in image data for imgur upload
@@ -58,13 +56,13 @@ class ImageController extends BaseController
                     'name' => $filename,
                     'title' => Input::get('title'),
                     'description' => Input::get('description'));
-            
+            echo "ERROR AFTER LINE 59";
             # upload data
             $basic = $client->api('image')->upload($imageData);
-            
+            echo "ERROR AFTER LINE 62";
             # get data to put in database
             $data = $basic->getData();
-
+            echo "ERROR AFTER LINE 65";
             $image = new Image;
             $image->user_id = Auth::user()->id;       
             $image->filename = $filename;
@@ -73,7 +71,7 @@ class ImageController extends BaseController
             $image->title = $data['title'];
             $image->description = $data['description'];
             $image->imgurId = $data['id'];
-            
+            echo "ERROR AFTER LINE 74";
             if (Input::get('profile') === 'true')
             {
             	# find old profile picture and change it to false
@@ -89,7 +87,7 @@ class ImageController extends BaseController
             {
             	$image->profile = false;
             }
-            
+            echo "ERROR AFTER LINE 90";
             # save image, catching errors
             try {
                 $image->save();
